@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html body {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            height: 150px;
+            width: 150px;
+        }
+
+        .top {
+            border-bottom: 2px solid black;
+        }
+
+        .bot {
+            border-top: 2px solid black;
+        }
+
+        .left {
+            border-right: 2px solid black;
+        }
+
+        .right {
+            border-left: 2px solid black;
+        }
+
+        td {
+            padding: 0;
+        }
+
+        table {
+            border-spacing: 0;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><div class="top left"></div></td>
+            <td><div class="top"></div></td>
+            <td><div class="top right"></div></td>
+        </tr>
+        <tr>
+            <td><div class="mid left"></div></td>
+            <td><div></div></td>
+            <td><div class="mid right"></div></td>
+        </tr>
+        <tr>
+            <td><div class="bot left"></div></td>
+            <td><div class="bot"></div></td>
+            <td><div class="bot right"></div></td>
+        </tr>
+    </table>
+</body>
+</html>

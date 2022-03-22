@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exploring cascading style sheet</title>
+    <link rel="stylesheet" href="css/exploringCSS.css">
+    <style>
+        #precedence {
+            background-color: green;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <p id="precedence" style="background-color: red;">Inline style takes precedence followed by internal and external style sheet.</p>
+
+    <div class="many">
+        elements with same class name will have css properties applied to them
+    </div>
+    <div class="many">
+        elements with same class name will have css properties applied to them
+    </div>
+    <div class="many">
+        elements with same class name will have css properties applied to them
+    </div>
+    <div class="many">
+        elements with same class name will have css properties applied to them
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>internal javascript</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // variableName is call an identifier.
+    var variableID = 2; // mutable variable
+    const constantID = 9; // constant variable
+
+    {
+        // only accessible within a scope
+        let letID = 4;
+
+        document.write("letID = " + letID);
+    }
+
+
+    window.document.write("<h1>written from an internal Javascript</h1>");
+    document.write("variableID = " + variableID + "<br>");
+    document.write("constantID = " + constantID + "<br>");
+    document.write(30 + 12);
+    document.write("<br>");
+    document.write(30 - 12);
+    document.write("<br>");
+    document.write(30 * 12);
+    document.write("<br>");
+    document.write(30 / 12);
+    document.write("<br>");
+    document.write(30 % 2);
+    document.write("<br>");
+    document.write(variableID++);
+    document.write("<br>");
+    document.write(++variableID);
+    document.write("<br>");
+    document.write(variableID--);
+    document.write("<br>");
+    document.write(--variableID);
+</script>

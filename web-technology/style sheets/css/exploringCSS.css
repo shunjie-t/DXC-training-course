@@ -1,0 +1,19 @@
+#precedence {
+    background-color: blue;
+    font-size: 40px;
+}
+
+.many {
+    margin: 20px 0;
+    background-color: burlywood;
+    height: 40px;
+    color:darkgreen;
+    font-size: 40;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-image: url(../images/wallhaven-4oodpm.jpg);
+    background-size: 1280px 720px;
+    background-repeat: no-repeat;
+}

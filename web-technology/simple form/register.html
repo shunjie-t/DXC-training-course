@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration form</title>
+</head>
+<body>
+    <div>
+        <fieldset>
+            <legend>Registration form</legend>
+            <form action="completed.html">
+                <div>
+                    <label for="full-name">full name</label>
+                    <input type="text" name="full-name" autofocus required>
+                </div><br>
+                <div>
+                    <label for="identity-number">NRIC/Passport number</label>
+                    <input type="text" name="identity-number" required>
+                </div><br>
+                <div>
+                    <label for="date-of-birth">date of birth</label>
+                    <input type="date" name="date-of-birth" required>
+                </div><br>
+                <div>
+                    <label for="gender">gender</label>
+                    <select name="gender">
+                        <option value=""></option>
+                        <option value="male">male</option>
+                        <option value="female">female</option>
+                        <option value="other">other</option>
+                      </select>
+                </div><br>
+                <div>
+                    <label for="home-address">home address</label>
+                    <input type="text" name="home-address" required>
+                </div><br>
+                <div>
+                    <label for="country-code">country code</label>
+                    <input type="text" name="country-code" style="width:30px;" required>
+                    <label for="phone-number">phone number</label>
+                    <input type="text" name="phone-number" required>
+                </div><br>
+                <div>
+                    <label for="email-address">email address</label>
+                    <input type="email" name="email-address">
+                </div><br>
+                <br><input type="submit" value="Submit">
+            </form>
+        </fieldset>
+    </div>
+</body>
+</html>
