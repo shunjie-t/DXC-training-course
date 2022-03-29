@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ways to create objects</title>
+</head>
+<body></body>
+</html>
+<script>
+    // object literal
+    var ObjectLiteral = {
+        stringProperty: 'object literal',
+        numberProperty: 1,
+        booleanProperty: false,
+        getNumberProperty: function() {
+            return this.numberProperty;
+        },
+        setNumberProperty: function(num) {
+            this.numberProperty = num;
+        }
+    };
+    document.write(`<h1>${ObjectLiteral.stringProperty}</h1>`);
+    document.write(`<h1>${ObjectLiteral.numberProperty}</h1>`);
+    document.write(`<h1>${ObjectLiteral.booleanProperty}</h1>`);
+    ObjectLiteral.setNumberProperty(0);
+    document.write(`<h1>Using getNumberProperty function: ${ObjectLiteral.getNumberProperty()}</h1>`);
+    document.write("<hr>");
+
+
+
+    // object constructor
+    function ObjectConstructor(stringProperty, numberProperty, booleanProperty) {
+        this.stringProperty = stringProperty;
+        this.numberProperty = numberProperty;
+        this.booleanProperty = booleanProperty;
+        this.getNumberProperty = function() {
+            return this.numberProperty;
+        },
+        this.setNumberProperty = function(num) {
+            this.numberProperty = num;
+        }
+    }
+    var OCinstance = new ObjectConstructor('object constructor', 2, true);
+    document.write(`<h1>${OCinstance.stringProperty}</h1>`);
+    document.write(`<h1>${OCinstance.numberProperty}</h1>`);
+    document.write(`<h1>${OCinstance.booleanProperty}</h1>`);
+    OCinstance.setNumberProperty(1);
+    document.write(`<h1>Using getNumberProperty function: ${OCinstance.getNumberProperty()}</h1>`);
+    document.write("<hr>");
+
+    // OR
+
+    var StoredObjectConstructor = function(stringProperty, numberProperty, booleanProperty) {
+        this.stringProperty = stringProperty;
+        this.numberProperty = numberProperty;
+        this.booleanProperty = booleanProperty;
+        this.getNumberProperty = function() {
+            return this.numberProperty;
+        },
+        this.setNumberProperty = function(num) {
+            this.numberProperty = num;
+        }
+    };
+    var SOCinstance = new StoredObjectConstructor('stored object constructor', 3, false);
+    document.write(`<h1>${SOCinstance.stringProperty}</h1>`);
+    document.write(`<h1>${SOCinstance.numberProperty}</h1>`);
+    document.write(`<h1>${SOCinstance.booleanProperty}</h1>`);
+    OCinstance.setNumberProperty(2);
+    document.write(`<h1>Using getNumberProperty function: ${OCinstance.getNumberProperty()}</h1>`);
+    document.write("<hr>");
+
+
+
+    // object constructor with literial(closure)
+    function ObjectConstructorLiterial(sProp, nProp, bProp) {
+        this.stringProperty = sProp;
+        this.numberProperty = nProp;
+
+        return {
+            stringProperty: this.stringProperty,
+            numberProperty: this.numberProperty,
+            booleanProperty: bProp,
+            getNumberProperty: function() {
+                return this.numberProperty;
+            },
+            setNumberProperty: function(num) {
+                this.numberProperty = num;
+            }
+        }
+    }
+    var OCLinstance = ObjectConstructorLiterial('object constructor with literial',4,false);
+    document.write(`<h1>${OCLinstance.stringProperty}</h1>`);
+    document.write(`<h1>${OCLinstance.numberProperty}</h1>`);
+    document.write(`<h1>${OCLinstance.booleanProperty}</h1>`);
+    OCLinstance.setNumberProperty(3);
+    document.write(`<h1>Using getNumberProperty function: ${OCLinstance.getNumberProperty()}</h1>`);
+    document.write("<hr>");
+
+    // OR
+
+    var StoredObjectConstructorLiterial = function(sProp, nProp, bProp) {
+        this.stringProperty = sProp;
+        this.numberProperty = nProp;
+
+        return {
+            stringProperty: this.stringProperty,
+            numberProperty: this.numberProperty,
+            booleanProperty: bProp,
+            getNumberProperty: function() {
+                return this.numberProperty;
+            },
+            setNumberProperty: function(num) {
+                this.numberProperty = num;
+            }
+        }
+    }
+    var SOCLinstance = ObjectConstructorLiterial('stored object constructor with literial',5,true);
+    document.write(`<h1>${SOCLinstance.stringProperty}</h1>`);
+    document.write(`<h1>${SOCLinstance.numberProperty}</h1>`);
+    document.write(`<h1>${SOCLinstance.booleanProperty}</h1>`);
+    SOCLinstance.setNumberProperty(4);
+    document.write(`<h1>Using getNumberProperty function: ${SOCLinstance.getNumberProperty()}</h1>`);
+    document.write("<hr>");
+
+
+
+    // object.create
+    var ObjectPrototype = {
+        stringProperty: 'object.create',
+        getNumberProperty: function() {
+                return this.numberProperty;
+        }
+    };
+    var ObjectCreate = Object.create(ObjectPrototype, {
+        numberProperty: {
+            writable: true,
+            enumerable: true,
+            configurable: true,
+            value: 6
+        },
+        booleanProperty: {
+            value: false,
+            writable: true,
+            enumerable: true,
+            configurable: true
+        },
+        setNumberProperty: {
+            writable: true,
+            value: function(num) {
+                this.numberProperty = num;
+            },
+            configurable: true,
+            enumerable: true
+        }
+    });
+    document.write(`<h1>${ObjectCreate.stringProperty}</h1>`);
+    document.write(`<h1>${ObjectCreate.numberProperty}</h1>`);
+    document.write(`<h1>${ObjectCreate.booleanProperty}</h1>`);
+    ObjectCreate.setNumberProperty(5);
+    document.write(`<h1>Using getNumberProperty function: ${ObjectCreate.getNumberProperty()}</h1>`);
+    document.write("<hr>");
+
+
+
+    // class object
+    class ClassObject {        
+        constructor(sProp, nProp, bProp) {
+            this.stringProperty = sProp;
+            this.numberProperty = nProp;
+            this.booleanProperty = bProp;
+            this.getNumberProperty = function() {
+                return this.numberProperty;
+            }
+        }
+
+        setNumberProperty(num) {
+            this.numberProperty = num;
+        }
+    }
+    var COinstance = new ClassObject("class object",7,false);
+    document.write(`<h1>${COinstance.stringProperty}</h1>`);
+    document.write(`<h1>${COinstance.numberProperty}</h1>`);
+    document.write(`<h1>${COinstance.booleanProperty}</h1>`);
+    COinstance.setNumberProperty(6);
+    document.write(`<h1>Using getNumberProperty function: ${COinstance.getNumberProperty()}</h1>`);
+</script>

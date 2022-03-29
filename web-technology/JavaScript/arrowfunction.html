@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body></body>
+</html>
+<script>
+//----------------------------no parameters before es6
+
+function hi(){
+  return 'hello';
+}
+console.log(hi());
+
+
+//----------------------------arrow function es6
+
+var hi1 = () => 'hello'
+console.log(hi1());
+
+// OR
+
+var hi2 = () => { return 'hello' }
+console.log(hi2());
+
+
+
+//----------------------------one parameter before es6
+
+function add5(num){
+  return num + 5;
+}
+console.log(add5(2));
+
+
+//----------------------------arrow function es6
+
+var add1 = num => num + 1
+console.log(add1(2));
+
+// OR
+
+var add2 = num => { return num + 2 }
+console.log(add2(2));
+
+// OR
+
+var add3 = (num) => num + 3
+console.log(add3(2));
+
+
+
+//----------------------------more than one parameter before es6
+
+function mul1(n1, n2){
+  return n1 + n2;
+}
+console.log(mul1(2, 2));
+
+
+//----------------------------arrow function es6
+
+var mul2 = (n1, n2) => n1 * n2
+console.log(mul2(2, 2));
+
+// OR
+
+var mul3 = (n1, n2) => { return n1 * n2 }
+console.log(mul3(2, 2));
+
+
+
+//----------------------------callback function
+
+setTimeout(function(){ 
+//do something 
+},1000);
+
+
+//----------------------------arrow function es6
+
+setTimeout(() => { 
+//do something
+},1000);
+
+
+
+//----------------------------callback function with parameter
+
+setTimeout(function(para){
+console.log(para);
+},1000);
+
+
+//----------------------------arrow function es6
+
+setTimeout((para) => console.log(para) ,1000);
+
+// OR
+
+setTimeout(para => console.log(para) ,1000);
+</script>

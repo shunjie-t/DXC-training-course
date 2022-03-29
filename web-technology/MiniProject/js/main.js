@@ -1,0 +1,1 @@
+document.write(Math.tan(360*Math.PI/180));

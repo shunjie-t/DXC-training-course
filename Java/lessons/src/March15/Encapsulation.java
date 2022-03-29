@@ -13,6 +13,10 @@ class ElectricFan {
 	private String color;
 	private int size;
 	
+	int a;
+	public int b;
+	protected int c;
+	
 	ElectricFan() {}
 	
 	ElectricFan(String brand, String color) {

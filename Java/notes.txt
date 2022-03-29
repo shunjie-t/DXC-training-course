@@ -1,0 +1,11 @@
+compile time polymorphism: Method Overloading
+runtime polymorphism: Method Overriding
+
+
+diamond shape problem:
+an object cannot inherit more than one class as all class are sub class of Object class
+
+
+serializable is a marker interface.
+marker interface does not have any methods declared.
+purpose of serializable interface is only to inform the compiler that the objects are to be serialized.

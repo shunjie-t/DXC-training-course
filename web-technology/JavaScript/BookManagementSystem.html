@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book management system</title>
+</head>
+<body></body>
+</html>
+<script>
+    alert("This is a book management system");
+    var books = [];
+
+    var input = prompt("Enter the number from the menu to select an option.\n1. Add a book\n2. View all books\n3. Delete a book\n4. Exit");
+
+    while(input !== "4" && input !== null) {
+        if(input === "1") {
+            addBook();
+        }
+        else if(input === "2") {
+            viewBooks();
+        }
+        else if(input === "3") {
+            deleteBook();
+        }
+        else {
+            console.log("invalid input");
+        }
+        input = prompt("Enter the number from the menu to select an option.\n1. Add a book\n2. View all books\n3. Delete a book\n4. Exit");
+    }
+    console.log("Exited system");
+
+    function addBook() {
+        var bookName = prompt("Enter book name to add");
+        books.push(bookName);
+    }
+
+    function viewBooks() {
+        console.log("Showing all books");
+        books.forEach(b => {
+            console.log(b);
+        });
+    }
+
+    function deleteBook() {
+        var bookName = prompt("Enter book name to delete");
+        var elementIdx = books.findIndex((bookName) => bookName === input);
+        books.splice(elementIdx, 1);
+    }
+</script>

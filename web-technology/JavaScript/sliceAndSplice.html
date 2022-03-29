@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body></body>
+</html>
+<script>
+    document.write("<h1>Slice</h1>");
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    document.write(`<h2>${months}</h2>`);
+    var secondQuarter = months.slice(3,6); // remove months in second quarter of year
+    document.write(`<h2>${secondQuarter}</h2>`);
+    var NovAndDec = months.slice(-2);
+    document.write(`<h2>${NovAndDec}</h2>`);
+
+    document.write("<br><br><h1>Splice</h1>");
+
+    var months = ["January", "February", "March", "April", "May", "June", "October", "November", "December"];
+    document.write(`<h2>${months}</h2>`);
+    months.splice(3, 3); // first and fourth quarter of year.
+    document.write(`<h2>${months}</h2>`);
+    months.splice(3,0,"April","May","June","July","August","September")
+    document.write(`<h2>${months}</h2>`);
+</script>

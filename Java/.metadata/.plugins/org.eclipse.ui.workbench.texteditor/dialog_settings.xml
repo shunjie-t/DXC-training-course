@@ -1,24 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="PrintPatten"/>
+		<item key="selection" value="employees"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="ImplicitTypecasting"/>
+			<item value="all"/>
+			<item value="Actor"/>
+			<item value="Actor1"/>
+			<item value=" sc."/>
+			<item value=" sc"/>
+			<item value="sc"/>
+			<item value="\\d"/>
+			<item value="HoursClockForMonth"/>
+			<item value="Salary"/>
+			<item value="TimeWorkedPerMonth"/>
+			<item value="Adding"/>
+			<item value="Printing"/>
+			<item value="Banking"/>
+			<item value="Addition"/>
+			<item value="Inter"/>
 		</list>
 		<list key="replacehistory">
-			<item value="PrintPatten"/>
+			<item value="employees"/>
+			<item value="Actor1"/>
+			<item value="Actor"/>
+			<item value=" scan."/>
+			<item value="scan."/>
+			<item value="\\d+"/>
+			<item value="HoursClockedForMonth"/>
+			<item value="SalaryForMonth"/>
+			<item value="HoursClockForMonth"/>
+			<item value="Adding2"/>
+			<item value="Printing2"/>
+			<item value="Banking2"/>
+			<item value="Adding"/>
+			<item value="Interface"/>
+			<item value="println(&quot;Result is"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="762"/>
-		<item key="DIALOG_Y_ORIGIN" value="222"/>
+		<item key="DIALOG_X_ORIGIN" value="1158"/>
+		<item key="DIALOG_Y_ORIGIN" value="368"/>
 		<item key="DIALOG_WIDTH" value="414"/>
-		<item key="DIALOG_HEIGHT" value="454"/>
+		<item key="DIALOG_HEIGHT" value="497"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 	</section>
 </section>

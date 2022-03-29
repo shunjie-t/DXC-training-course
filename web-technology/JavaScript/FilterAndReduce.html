@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body></body>
+</html>
+<script>
+    var num = [1,2,3,4,5,6,7,8,9,10];
+
+    var evenArray = num.filter(isEven);
+    var oddArray = num.filter(isOdd);
+
+    function isEven(value) {
+        return value % 2 === 0;
+    }
+
+    function isOdd(value) {
+        return value % 2 === 1;
+    }
+
+    document.write(`<h3>Complete array is ${num}</h3>`);
+    document.write(`<h3>Even array is ${evenArray}</h3>`);
+    document.write(`<h3>Odd array is ${oddArray}</h3>`);
+
+
+    var total = num.reduce(sum);
+
+    function sum(prev, currValue, index, arr) {
+        return prev + currValue;
+    };
+
+    document.write(`<br><br><h3>Sum of array is ${total}</h3>`);
+</script>
