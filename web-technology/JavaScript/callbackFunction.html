@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>callback functions</title>
+</head>
+<body></body>
+</html>
+<script>
+    function main_function(callback) {
+        document.write("This is from main_function<br>");
+        callback("argument from main passed into callback<br>");
+    }
+
+    function callback_function(param) {
+        document.write("This is from callback_function<br>");
+        document.write(param);
+    }
+
+    main_function(callback_function);
+
+    document.write("<hr>");
+
+    main_function(callback_function("argument passed in from invocation<br>"));
+</script>

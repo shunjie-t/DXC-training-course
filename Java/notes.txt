@@ -9,3 +9,11 @@ an object cannot inherit more than one class as all class are sub class of Objec
 serializable is a marker interface.
 marker interface does not have any methods declared.
 purpose of serializable interface is only to inform the compiler that the objects are to be serialized.
+
+
+Arraylist is not suitable for insertion into the middle of it as it needs to shift the existing elements 
+in order to insert. Shifting many elements will be inefficient.
+Arraylist is suitable for appending elements.
+
+
+Linkedlist is suitable for insertion

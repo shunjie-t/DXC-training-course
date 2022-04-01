@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body></body>
+</html>
+<script>
+    var car = {
+        carmodel: ["Seltos", "Sonet", "Carnival"],
+        carcolor: ["White", "Black", "Red"],
+        drivemode: ["Automatic transmission", "Manual transmission"]
+    }
+
+    var choose_drivemode = () => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(document.write("Car choosen.<br>"));
+            }, 10000);
+        });
+    };
+
+    async function ordercar() {
+        document.write("Order started. Awaiting order to complete...<br>");
+        await choose_drivemode();
+        document.write("Order completed.<br>");
+    }
+
+    ordercar();
+</script>

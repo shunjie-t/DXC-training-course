@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="employees"/>
+		<item key="selection" value=""/>
 		<item key="wrap" value="true"/>
-		<item key="casesensitive" value="false"/>
+		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="emp[index]"/>
+			<item value="emp[index]."/>
+			<item value="printMenu"/>
+			<item value="viewOrEditEmployee"/>
+			<item value="employees"/>
+			<item value="tSalary = Math.round(tSalary * 100);"/>
+			<item value="in here"/>
+			<item value="this."/>
+			<item value="super."/>
+			<item value="totalHoursWorked"/>
+			<item value="this.salary"/>
+			<item value="salary"/>
 			<item value="all"/>
 			<item value="Actor"/>
 			<item value="Actor1"/>
-			<item value=" sc."/>
-			<item value=" sc"/>
-			<item value="sc"/>
-			<item value="\\d"/>
-			<item value="HoursClockForMonth"/>
-			<item value="Salary"/>
-			<item value="TimeWorkedPerMonth"/>
-			<item value="Adding"/>
-			<item value="Printing"/>
-			<item value="Banking"/>
-			<item value="Addition"/>
-			<item value="Inter"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
+			<item value="displayMenu"/>
+			<item value="viewOrEditEmployeeDetails"/>
+			<item value="emp"/>
+			<item value="overtime"/>
 			<item value="employees"/>
 			<item value="Actor1"/>
 			<item value="Actor"/>
@@ -35,11 +40,6 @@
 			<item value="SalaryForMonth"/>
 			<item value="HoursClockForMonth"/>
 			<item value="Adding2"/>
-			<item value="Printing2"/>
-			<item value="Banking2"/>
-			<item value="Adding"/>
-			<item value="Interface"/>
-			<item value="println(&quot;Result is"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

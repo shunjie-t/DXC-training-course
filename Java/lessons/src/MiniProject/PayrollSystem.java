@@ -1,4 +1,4 @@
-package MiniProject;
+package miniProject;
 
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -17,9 +17,9 @@ public class PayrollSystem {
 		String input;
 		boolean running = true;
 		
-		printMenu();
-		
+		System.out.println("Welcome to payroll system.");
 		while(running) {
+			displayMenu();
 			System.out.print("Enter an option: ");
 			input = scan.nextLine(); // outofmemory exception
 			System.out.println("");
@@ -33,9 +33,9 @@ public class PayrollSystem {
 			case "1":
 				computeEmployeePay();
 				break;
-//			case "2":
-//				viewOrEditEmployee();
-//				break;
+			case "2":
+				viewOrEditEmployeeDetails();
+				break;
 //			case "3":
 //				addNewEmployee();
 //				break;
@@ -48,15 +48,33 @@ public class PayrollSystem {
 		}
 	}
 	
-	public static void printMenu() {
-		System.out.println("Welcome to payroll system.\n");
-		System.out.println("----------------------------------------------------");
+	public static void displayMenu() {
+		System.out.println("\n----------------------------------------------------");
 		System.out.println("0. Exit system.");
 		System.out.println("1. Compute existing employee's salary for the month.");
-//		System.out.println("2. View or edit existing employee details.");
+		System.out.println("2. View or edit existing employee details.");
 //		System.out.println("3. Add a new employee.");
 //		System.out.println("4. Delete an employee.");
 		System.out.println("----------------------------------------------------");
+	}
+	
+	public static Employee[] displayEmployees() {
+//		Employee[] emp = retrieveEmployeeRecords();
+		Employee[] emp = {
+				new Employee("F1290","John","Smith",new Date(1998,2,23),new Date(2022,2,1),"monthly",4000.00f),
+				new Employee("F0312","Sean","Hoffman",new Date(1987,3,30),new Date(2015,9,1),"monthly with commission",2500.00f),
+				new Employee("F1292","Faye","Johnson", new Date(1997,5,12),new Date(2022,0,1),"commission",0.00f),
+				new Employee("F0946","Leonard","Baumer",new Date(1971,7,5),new Date(2017,0,1),"hourly",24.00f)
+		};
+		
+		System.out.println("Select an employee");
+		System.out.println("--------------------------------------------------------------------------------------------");
+		System.out.println("ID\tEmployee number\t\tFirst name\t\tLast name\t\tPay type");
+		for(int i = 0; i < emp.length; i++) {
+			System.out.printf("%d.\t%s\t\t\t%s\t\t\t%s\t\t\t%s%n",(i+1),emp[i].getEmployeeNumber(),emp[i].getFirstName(),emp[i].getLastName(),emp[i].getPayType());
+		}
+		
+		return emp;
 	}
 	
 	public static void computeEmployeePay() {
@@ -64,19 +82,8 @@ public class PayrollSystem {
 		int index = 0;
 		boolean prompt = true;
 		boolean exit = false;
-		SalaryForMonth[] employees = {
-				new SalaryForMonth("F1290","John","Tan",new Date(1998,2,23),"junior accountant",2600,new Date(2022,2,1),true),
-				new SalaryForMonth("F0312","Sean","Ang",new Date(1987,3,30),"senior accountant",4000,new Date(2015,9,1),true),
-				new SalaryForMonth("F1292","Faye","Neo", new Date(1997,5,12),"marketing associate",2900,new Date(2022,0,1),false),
-				new SalaryForMonth("F0946","Leonard","Soh",new Date(1971,7,5),"sales associate",1900,new Date(2017,0,1),false)
-		};
 		
-		System.out.println("Select an employee");
-		System.out.println("----------------------------------------------");
-		System.out.println("ID\tEmployee number\t\tFirst name\t\tLast name\t\tJob title");
-		for(int i = 0; i < employees.length; i++) {
-			System.out.printf("%d.\t%s\t\t\t%s\t\t\t%s\t\t\t%s%n",(i+1),employees[i].getEmployeeNumber(),employees[i].getFirstName(),employees[i].getLastName(),employees[i].getJobTitle());
-		}
+		Employee[] emp = displayEmployees();
 
 		while(prompt && !exit) {
 //			System.out.print("Enter an ID or filter by employee number or name: ");
@@ -92,65 +99,42 @@ public class PayrollSystem {
 			}
 		}
 		
-		prompt = true;
-		while(prompt && !exit) {
-			System.out.print("Enter the total hours worked for the month: ");
-			input = scan.nextLine();
-			if(input.matches("\\d+")) {
-				employees[index].setTotalHoursWorked(Integer.parseInt(input));
-				prompt = false;
-			}
-			else {
-				System.out.println("Invalid input, try again.");
-			}
-		}
+		emp[index].calculateTotalPay();
+	}
+	
+	public static void viewOrEditEmployeeDetails() {
+		String input;
+		int index = 0;
+		boolean prompt = true;
+		boolean exit = false;
 		
-		if(employees[index].getHasOvertime()) {
-			prompt = true;
-			while(prompt && !exit) {
-				System.out.print("Enter the total overtime hours for the month (default 0): ");
-				input = scan.nextLine();
-				
-				if(input.matches("\\d+")) {
-					employees[index].setTotalOvertime(Integer.parseInt(input));
-					prompt = false;
-				}
-				else if(input.equals("")) {
-					employees[index].setTotalOvertime(0);
-					prompt = false;
-				}
-				else {
-					System.out.println("Invalid input, try again.");
-				}
-			}
-		}
+		Employee[] emp = displayEmployees();
 		
-		prompt = true;
 		while(prompt && !exit) {
-			System.out.print("Enter performance bonus for the month (default 0): ");
+//			System.out.print("Enter an ID or filter by employee number or name: ");
+			System.out.print("Enter an ID: ");
 			input = scan.nextLine();
 			
 			if(input.matches("\\d+")) {
-				employees[index].setTotalOvertime(Integer.parseInt(input));
-				prompt = false;
-			}
-			else if(input.equals("")) {
-				employees[index].setTotalOvertime(0);
+				index = Integer.parseInt(input);
 				prompt = false;
 			}
 			else {
 				System.out.println("Invalid input, try again.");
 			}
 		}
+		
+		emp[index].displayDetail();
+		input = scan.nextLine();
+		System.out.println(input);
 	}
 	
-	public static void viewOrEditEmployee() {}
+//	public static void addNewEmployee() {}
 	
-	public static void addNewEmployee() {}
+//	public static void deleteEmployee() {}
 	
-	public static void deleteEmployee() {}
-	
-	private static void retrieveEmployeeRecords() {
+	/*private static Employee[] retrieveEmployeeRecords() {
 		// connect to database and get the employee's records
-	}
+		return new Employee[0];
+	}*/
 }

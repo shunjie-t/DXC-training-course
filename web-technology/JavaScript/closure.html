@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>closure and scope chaining</title>
+</head>
+<body></body>
+</html>
+<script>
+    function outer() {
+        document.write("from outer function<br>");
+        var n = 30;
+        function inner() {
+            document.write("from inner function<br>");
+            return n;
+        }
+        return inner();
+    }
+
+    outer();
+
+    document.write("<br><br>");
+
+    var x = 10;
+
+    function sum1(a) {
+        return function sum2(b) {
+            return function sum3(c) {
+                return function sum4(d) {
+                    return a+b+c+d+x;
+                }
+            }
+        }
+    }
+
+    var x1 = sum1(20);
+    var x2 = x1(30);
+    var x3 = x2(40);
+    var x4 = x3(50);
+
+    document.write(x1+"<br>");
+    document.write(x2+"<br>");
+    document.write(x3+"<br>");
+    document.write(x4+"<br>");
+</script>

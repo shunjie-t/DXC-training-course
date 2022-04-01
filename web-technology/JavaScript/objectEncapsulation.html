@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encapsulation</title>
+</head>
+<body></body>
+</html>
+<script>
+    function test(para1, para2) {
+        this.para1 = para1;
+        this.para2 = para2;
+        let para3 = "Arg3";
+
+    }
+
+    var t1 = new test("abc", "def");
+    console.log(t1.para1);
+    console.log(t1.para2);
+    console.log(t1.para3);
+</script>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+</head>
+<body></body>
+</html>
+<script>
+    document.write("-----------------------------------");
+    let car = {
+        carmodel: ["Seltos", "Sonet", "Carnival"],
+        carcolor: ["White", "Black", "Red"],
+        drivemode: ["Automatic transmission", "Manual transmission"]
+    }
+
+    let is_showroom_open = true;
+
+    let order = (time, work) => {
+        return new Promise((resolve, reject) => {
+            if(is_showroom_open) {
+                setTimeout(() => {
+                    resolve(work());
+                }, time);
+            }
+            else {
+                reject(document.write("Our showroom is closed<br>"));
+            }
+        })
+    }
+
+    order(5000, () => {
+        document.write(`The customer has booked ${car.carmodel[2]} <br>`);
+    })
+    .then(() => {
+        return order(1000, () => {
+            document.write("Production has started <br>");
+        })
+    })
+    .then(() => {
+        return order(3000, () => {
+            document.write(`Customer has selected ${car.drivemode[0]}<br>`);
+        });
+    })
+    .then(() => {
+        return order(4000, () => {
+            document.write("Car parts are assembled based on drive mode selected<br>");
+        });
+    })
+    .then(() => {
+        return order(5000, () => {
+            document.write(`Customer has choosen ${car.carcolor[1]}<br>`);
+        });
+    })
+    .catch(() => {
+        document.write("Hence, customer has left.<br>");
+    })
+    .finally(() => {
+        document.write("Late evening the showroom is locked!");
+    })
+</script>
