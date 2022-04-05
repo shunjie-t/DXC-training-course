@@ -37,7 +37,7 @@ public class Commission extends SalaryForMonth {
 			System.out.printf("Current total sales earnings: %.2f%n",totalSalesAmount);
 			System.out.printf("Input total sales earnings for this month (%.2f): ",totalSalesAmount);
 			input = scan.nextLine();
-			if(input.matches("^\\d+\\.*[0-9]{0,2}$")) {
+			if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
 				setTotalSalesAmount(Float.parseFloat(input));
 				invalid = false;
 			}
@@ -60,7 +60,7 @@ public class Commission extends SalaryForMonth {
 			System.out.printf("Current performance bonus: %.2f%n",getPerformanceBonusAmount());
 			System.out.print("Input performance bonus for this month (default 0): ");
 			input = scan.nextLine();
-			if(input.matches("^\\d+\\.*[0-9]{0,2}$")) {
+			if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
 				setPerformanceBonusAmount(Float.parseFloat(input));
 				invalid = false;
 			}

@@ -10,7 +10,7 @@ public class Employee {
 	private String lastName;
 	private LocalDate dateOfBirth;
 	private LocalDate joinDate;
-	private String payType; // hourly, monthly, commission, monthly with commission
+	private String payType;
 	private float payAmount;
 	private SalaryForMonth salary;
 	

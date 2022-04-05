@@ -51,7 +51,7 @@ public class Monthly extends SalaryForMonth {
 			System.out.printf("Current performance bonus: %.2f%n",getPerformanceBonusAmount());
 			System.out.printf("Input performance bonus for this month (%.2f): ",getPerformanceBonusAmount());
 			input = scan.nextLine();
-			if(input.matches("^\\d+\\.*[0-9]{0,2}$")) {
+			if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
 				setPerformanceBonusAmount(Float.parseFloat(input));
 				invalid = false;
 			}

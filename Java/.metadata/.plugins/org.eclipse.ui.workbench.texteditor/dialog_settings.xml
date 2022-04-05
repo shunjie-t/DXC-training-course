@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="Enter 00 to go back to previous menu or 000 to exit."/>
+		<item key="selection" value="+emp"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="Enter 00 to go back to previous menu or 000 to exit."/>
-			<item value="Enter an option"/>
-			<item value="&quot;Enter"/>
-			<item value="input"/>
-			<item value="standardHours"/>
-			<item value=" res"/>
-			<item value="res "/>
-			<item value="updateDetails"/>
-			<item value="gross salary"/>
-			<item value="select a new"/>
-			<item value="prompt"/>
-			<item value="calculating"/>
-			<item value="res"/>
-			<item value="Res"/>
-			<item value="-&quot;);"/>
+			<item value="+emp"/>
+			<item value="displayEmployees"/>
+			<item value="Invalid input, please enter number 0-2"/>
+			<item value="emp[i]"/>
+			<item value="emp[index]"/>
+			<item value="retrieveEmployeeRecords"/>
+			<item value="^\\d+\\."/>
+			<item value="^\\d+\\.{0,1}\\d{0,2}$"/>
+			<item value="^\d+\.{0,1}\d{0,2}$"/>
+			<item value="^\\d+\\.{0,1}[0-9]{0,2}$"/>
+			<item value="Select an employee"/>
+			<item value="LocalDate"/>
+			<item value="isBlank()"/>
+			<item value="promptForInput"/>
+			<item value="salary for"/>
 		</list>
 		<list key="replacehistory">
+			<item value="emp.get(i)"/>
+			<item value="emp.get(index)"/>
+			<item value="^\d+\.{0,1}\d{0,2}$"/>
 			<item value="&quot;\nEnter"/>
 			<item value=""/>
 			<item value="standardHoursPerDay"/>
@@ -37,9 +40,6 @@
 			<item value="emp"/>
 			<item value="overtime"/>
 			<item value="employees"/>
-			<item value="Actor1"/>
-			<item value="Actor"/>
-			<item value=" scan."/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
