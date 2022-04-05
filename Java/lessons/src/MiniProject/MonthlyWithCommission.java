@@ -1,7 +1,5 @@
 package miniProject;
 
-import java.util.Scanner;
-
 public class MonthlyWithCommission extends Commission {
 	private int unpaidLeaveTaken = 0;
 	
@@ -18,19 +16,33 @@ public class MonthlyWithCommission extends Commission {
 	}
 	
 	@Override
-	public void promptForInput() {
-		Scanner scan = new Scanner(System.in);
+	public boolean promptForInput() {
 		String input = "";
 		boolean invalid = true;
 		
+		System.out.println("-----------------------------------------------------------------------------------------------");
+		System.out.println("000. Exit system.");
+		System.out.println("00. Previous menu.");
+		System.out.println("-----------------------------------------------------------------------------------------------");
+		
 		while(invalid) {
-			System.out.print("Input unpaid leave taken (default 0): ");
+			System.out.printf("Current unpaid leave taken: %d%n",unpaidLeaveTaken);
+			System.out.printf("Input unpaid leave taken (%d): ",unpaidLeaveTaken);
 			input = scan.nextLine();
-			if(input.matches("\\d+")) {
+			if(input.matches("^[0-20]$")) {
 				setUnpaidLeaveTaken(Integer.parseInt(input));
 				invalid = false;
 			}
-			else if(input.equals("")) {
+			else if(input.isBlank()) {
+				invalid =  false;
+			}
+			else if(input.matches("00")) {
+				return true;
+			}
+			else if(input.matches("000+")) {
+				System.exit(0);
+			}
+			else if(input.equals("") || input.matches("0")) {
 				setUnpaidLeaveTaken(0);
 				invalid = false;
 			}
@@ -41,11 +53,21 @@ public class MonthlyWithCommission extends Commission {
 		
 		invalid = true;
 		while(invalid) {
-			System.out.print("Input total sales income for this month: ");
+			System.out.printf("Current total sales earnings: %.2f%n",getTotalSalesAmount());
+			System.out.printf("Input total sales earnings for this month (%.2f): ",getTotalSalesAmount());
 			input = scan.nextLine();
-			if(input.matches("\\d+")) {
+			if(input.matches("^\\d+\\.*[0-9]{0,2}$")) {
 				setTotalSalesAmount(Float.parseFloat(input));
 				invalid = false;
+			}
+			else if(input.isBlank()) {
+				invalid =  false;
+			}
+			else if(input.matches("00")) {
+				return true;
+			}
+			else if(input.matches("000+")) {
+				System.exit(0);
 			}
 			else {
 				System.out.println("Invalid input, try again.");
@@ -54,20 +76,28 @@ public class MonthlyWithCommission extends Commission {
 		
 		invalid = true;
 		while(invalid) {
+			System.out.printf("Current performance bonus: %.2f%n",getPerformanceBonusAmount());
 			System.out.print("Input performance bonus for this month (default 0): ");
 			input = scan.nextLine();
-			if(input.matches("\\d+")) {
+			if(input.matches("^\\d+\\.*[0-9]{0,2}$")) {
 				setPerformanceBonusAmount(Float.parseFloat(input));
 				invalid = false;
 			}
-			else if(input.equals("")) {
-				setPerformanceBonusAmount(0);
-				invalid = false;
+			else if(input.isBlank()) {
+				invalid =  false;
+			}
+			else if(input.matches("00")) {
+				return true;
+			}
+			else if(input.matches("000+")) {
+				System.exit(0);
 			}
 			else {
 				System.out.println("Invalid input, try again.");
 			}
 		}
+		
+		return false;
 	}
 
 	@Override
@@ -78,7 +108,7 @@ public class MonthlyWithCommission extends Commission {
 		float commission = getTotalSalesAmount() * getCommissionRate();
 		
 		if(unpaidLeaveTaken > 0) {
-			tSalary = pay - (pay / getworkDaysForMonth()) * unpaidLeaveTaken;
+			tSalary = pay - (pay / getWorkDaysForMonth()) * unpaidLeaveTaken;
 			tSalary += commission + bonus;
 		}
 		else {
@@ -98,4 +128,106 @@ public class MonthlyWithCommission extends Commission {
 		System.out.println("Gross salary: " + getTotalSalary());
 	}
 
+	@Override
+	public void displaySalaryDetails() {
+		System.out.printf("4. Unpaid leaves taken: %d%n", unpaidLeaveTaken);
+		System.out.printf("5. Commission rate: %.2f%n", getCommissionRate());
+		System.out.printf("6. Total sales earning: %.2f%n", getTotalSalesAmount());
+	}
+	
+	@Override
+	public boolean promptAndUpdateSalary(int option) {
+		String input;
+		
+		if(option == 4) {
+			System.out.println("\nEnter new unpaid leaves taken.");
+			System.out.println("-----------------------------------------------------------------------------------------------");
+			System.out.println("No input defaults to current leaves.");
+			System.out.println("0. Previous menu.");
+			System.out.println("00. Exit system.");
+			System.out.println("-----------------------------------------------------------------------------------------------");
+			while(true) {
+				System.out.printf("Current unpaid leaves taken: %d%n",getUnpaidLeaveTaken());
+				System.out.print("Leaves: ");
+				input = scan.next();
+				if(input.matches("^[0-20]$")) {
+					this.setUnpaidLeaveTaken(Integer.parseInt(input));
+					return false;
+				}
+				else if(input.isEmpty()) {
+					return false;
+				}
+				else if(input.matches("0")) {
+					return true;
+				}
+				else if(input.matches("00+")) {
+					System.out.println("Exiting system.");
+					System.exit(0);
+				}
+				else {
+					System.out.println("Invalid input, try again");
+				}
+			}
+		}
+		else if(option == 5) {
+			System.out.println("\nEnter new commission rate.");
+			System.out.println("-----------------------------------------------------------------------------------------------");
+			System.out.println("No input defaults to current commission rate.");
+			System.out.println("0. Previous menu.");
+			System.out.println("00. Exit system.");
+			System.out.println("-----------------------------------------------------------------------------------------------");
+			while(true) {
+				System.out.printf("Current commission rate: %.2f%n",getCommissionRate());
+				System.out.print("Rate in decimal: ");
+				input = scan.next();
+				if(input.matches("^0\\.[0-9]{0,2}[1-9]$")) {
+					setCommissionRate(Float.parseFloat(input));
+					return false;
+				}
+				else if(input.isEmpty()) {
+					return false;
+				}
+				else if(input.matches("0")) {
+					return true;
+				}
+				else if(input.matches("00+")) {
+					System.out.println("Exiting system.");
+					System.exit(0);
+				}
+				else {
+					System.out.println("Invalid input, try again");
+				}
+			}
+		}
+		else {
+			System.out.println("\nEnter new total sales earnings amount");
+			System.out.println("-----------------------------------------------------------------------------------------------");
+			System.out.println("No input defaults to current sales earnings amount.");
+			System.out.println("0. Previous menu.");
+			System.out.println("00. Exit system.");
+			System.out.println("-----------------------------------------------------------------------------------------------");
+			while(true) {
+				System.out.printf("Current sales earnings amount: %.2f%n",getTotalSalesAmount());
+				System.out.print("Amount: ");
+				input = scan.next();
+				if(input.matches("^\\d*\\.[0-9]{0,2}$") || input.matches("^[1-9]+$")) {
+					this.setTotalSalesAmount(Float.parseFloat(input));
+					return false;
+				}
+				else if(input.isEmpty()) {
+					return false;
+				}
+				else if(input.matches("0")) {
+					return true;
+				}
+				else if(input.matches("00+")) {
+					System.out.println("Exiting system.");
+					System.exit(0);
+				}
+				else {
+					System.out.println("Invalid input, try again");
+				}
+			}
+		}
+	}
 }

@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value=""/>
+		<item key="selection" value="Enter 00 to go back to previous menu or 000 to exit."/>
 		<item key="wrap" value="true"/>
-		<item key="casesensitive" value="true"/>
+		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="emp[index]"/>
-			<item value="emp[index]."/>
-			<item value="printMenu"/>
-			<item value="viewOrEditEmployee"/>
-			<item value="employees"/>
-			<item value="tSalary = Math.round(tSalary * 100);"/>
-			<item value="in here"/>
-			<item value="this."/>
-			<item value="super."/>
-			<item value="totalHoursWorked"/>
-			<item value="this.salary"/>
-			<item value="salary"/>
-			<item value="all"/>
-			<item value="Actor"/>
-			<item value="Actor1"/>
+			<item value="Enter 00 to go back to previous menu or 000 to exit."/>
+			<item value="Enter an option"/>
+			<item value="&quot;Enter"/>
+			<item value="input"/>
+			<item value="standardHours"/>
+			<item value=" res"/>
+			<item value="res "/>
+			<item value="updateDetails"/>
+			<item value="gross salary"/>
+			<item value="select a new"/>
+			<item value="prompt"/>
+			<item value="calculating"/>
+			<item value="res"/>
+			<item value="Res"/>
+			<item value="-&quot;);"/>
 		</list>
 		<list key="replacehistory">
+			<item value="&quot;\nEnter"/>
 			<item value=""/>
+			<item value="standardHoursPerDay"/>
+			<item value="StandardHoursPerDay"/>
+			<item value="rows"/>
+			<item value="Previous menu"/>
+			<item value="initialize"/>
 			<item value="displayMenu"/>
 			<item value="viewOrEditEmployeeDetails"/>
 			<item value="emp"/>
@@ -34,17 +40,11 @@
 			<item value="Actor1"/>
 			<item value="Actor"/>
 			<item value=" scan."/>
-			<item value="scan."/>
-			<item value="\\d+"/>
-			<item value="HoursClockedForMonth"/>
-			<item value="SalaryForMonth"/>
-			<item value="HoursClockForMonth"/>
-			<item value="Adding2"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1158"/>
-		<item key="DIALOG_Y_ORIGIN" value="368"/>
+		<item key="DIALOG_X_ORIGIN" value="1335"/>
+		<item key="DIALOG_Y_ORIGIN" value="320"/>
 		<item key="DIALOG_WIDTH" value="414"/>
 		<item key="DIALOG_HEIGHT" value="497"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>

@@ -1,19 +1,26 @@
 package miniProject;
 
-import java.util.Date;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public abstract class SalaryForMonth {
 	private float performanceBonusAmount = 0;
-	private int currentMonth = new Date().getMonth();
-	private int currentYear = new Date().getYear();
-	private int workDaysForMonth;
+	protected LocalDate currentDate = LocalDate.now();
+	private int workDaysForMonth = 0;
 	private float payAmount;
 	private float totalSalary;
+	public Scanner scan = new Scanner(System.in);
 	
 	SalaryForMonth(float pAmount) {
-		// set workDaysForMonth based on currentMonth and currentYear
-		this.workDaysForMonth = 23;
+		LocalDate tempDate;
+		
+		for(int i = 1; i <= currentDate.lengthOfMonth(); i++) {
+			tempDate = LocalDate.of(currentDate.getYear(), currentDate.getMonthValue(), i);
+			if(tempDate.getDayOfWeek() != DayOfWeek.SATURDAY && tempDate.getDayOfWeek() != DayOfWeek.SUNDAY) {
+				this.workDaysForMonth++;
+			}
+		}
 		
 		this.payAmount = pAmount;
 	}
@@ -26,35 +33,15 @@ public abstract class SalaryForMonth {
 		this.performanceBonusAmount = pBonusAmount;
 	}
 	
-	public int getCurrentMonth() {
-		return this.currentMonth;
+	public LocalDate getDate() {
+		return this.currentDate;
 	}
 	
-	public void setCurrentMonth(int cMonth) {
-		/*if() {
-			this.currentMonth = cMonth;
-		}
-		else {
-			System.out.println("Invalid month.");
-		}*/
-		this.currentMonth = cMonth;
+	public void setDate(LocalDate cDate) {
+		this.currentDate = cDate;
 	}
 	
-	public int getCurrentYear() {
-		return this.currentYear;
-	}
-	
-	public void setCurrentYear(int cYear) {
-		/*if() {
-			this.currentYear = cYear;
-		}
-		else {
-			System.out.println("Invalid year.");
-		}*/
-		this.currentYear = cYear;
-	}
-	
-	public int getworkDaysForMonth() {
+	public int getWorkDaysForMonth() {
 		return this.workDaysForMonth;
 	}
 	
@@ -78,6 +65,10 @@ public abstract class SalaryForMonth {
 		System.out.printf("Gross salary: %.2f%n", totalSalary);
 	}
 	
-	abstract public void promptForInput();
+	
+	abstract public boolean promptForInput();
 	abstract public void computeSalary();
+	
+	abstract public void displaySalaryDetails();
+	abstract public boolean promptAndUpdateSalary(int option);
 }
