@@ -1,0 +1,50 @@
+#menu-container {
+    display: grid;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+}
+
+header {
+    background-color: rgb(250,248,241);
+    position: relative;
+    height: 15vh;
+    width: 100%;
+    display: flex;
+}
+
+header > div {
+    height: 100%;
+    width: 15%;
+}
+
+header > nav {
+    height: 100%;
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menuItems {
+    height: 100%;
+    width: 25%;
+}
+
+.menuItems > a {
+    display: block;
+    height: 96%;
+    text-align: center;
+    text-decoration: none;
+    /* justify-items: center; */
+    color: black;
+    line-height: 100px;
+}
+
+.menuItems > a:hover {
+    color: orange;
+    border-bottom: 5px solid orange;
+}

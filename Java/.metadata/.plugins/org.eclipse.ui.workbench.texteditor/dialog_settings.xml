@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="+emp"/>
+		<item key="selection" value="displaySalaryDetails"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="displaySalaryDetails"/>
+			<item value="performance bonus"/>
+			<item value="updateDetails"/>
+			<item value="displayAndUpdateDetails"/>
 			<item value="+emp"/>
 			<item value="displayEmployees"/>
 			<item value="Invalid input, please enter number 0-2"/>
@@ -19,10 +23,6 @@
 			<item value="^\d+\.{0,1}\d{0,2}$"/>
 			<item value="^\\d+\\.{0,1}[0-9]{0,2}$"/>
 			<item value="Select an employee"/>
-			<item value="LocalDate"/>
-			<item value="isBlank()"/>
-			<item value="promptForInput"/>
-			<item value="salary for"/>
 		</list>
 		<list key="replacehistory">
 			<item value="emp.get(i)"/>

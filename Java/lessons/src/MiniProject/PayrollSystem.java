@@ -91,57 +91,54 @@ public class PayrollSystem {
 			System.out.print("Enter an ID: ");
 			input = scan.nextLine();
 			
-			if(input.matches("00+")) {
+			if(input.matches("^0*[1-"+emp.size()+"]$")) {
+				index = (Integer.parseInt(input) - 1);
+				prompt = false;
+				
+				System.out.printf("%n%s %d salary for %s %s(%s) %n",
+						dt.getMonth(),
+						dt.getYear(),
+						emp.get(index).getFirstName(),
+						emp.get(index).getLastName(),
+						emp.get(index).getEmployeeNumber());
+				prompt = emp.get(index).calculateTotalPay();
+			}
+			else if(input.matches("00+")) {
 				System.out.println("Exiting system.");
 				System.exit(0);
 			}
 			else if(input.matches("0")) {
 				return;
 			}
-			else if(input.matches("^0*[1-"+emp.size()+"]$")) {
-				index = (Integer.parseInt(input) - 1);
-				prompt = false;
-			}
 			else {
 				System.out.println("Invalid input, try again.");
 			}
-			
-			System.out.printf("%n%s %d salary for %s %s(%s) %n",
-					dt.getMonth(),
-					dt.getYear(),
-					emp.get(index).getFirstName(),
-					emp.get(index).getLastName(),
-					emp.get(index).getEmployeeNumber());
-			prompt = emp.get(index).calculateTotalPay();
 		}
 	}
 	
 	public void viewOrEditEmployeeDetails() {
 		String input;
 		int index = 0;
-		boolean prompt = true;
 		
-		while(prompt) {
+		while(true) {
 			displayEmployees();
 			System.out.print("Enter an ID: ");
 			input = scan.nextLine();
 			
-			if(input.matches("00+")) {
+			if(input.matches("0*[1-"+emp.size()+"]")) {
+				index = Integer.parseInt(input) - 1;
+				emp.get(index).displayAndUpdateDetails();
+			}
+			else if(input.matches("00+")) {
 				System.out.println("Exiting system.");
 				System.exit(0);
 			}
 			else if(input.matches("0")) {
 				return;
 			}
-			else if(input.matches("0*[1-"+emp.size()+"]")) {
-				index = Integer.parseInt(input) - 1;
-				prompt = false;
-			}
 			else {
 				System.out.println("Invalid input, try again.");
 			}
-			
-			prompt = emp.get(index).displayAndUpdateDetails();
 		}
 	}
 	

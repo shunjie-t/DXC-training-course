@@ -126,7 +126,7 @@ public class Employee {
 		return this.salary;
 	}
 	
-	public boolean displayAndUpdateDetails() {
+	public void displayAndUpdateDetails() {
 		String input;
 		int option;
 		
@@ -156,12 +156,12 @@ public class Employee {
 			input = scan.next();
 			if(input.matches("[1-6]")) {
 				option = Integer.parseInt(input);
-				return updateDetails(option);
+				updateDetails(option);
 			}
 			else if(input.matches("0")) {
-				return true;
+				return;
 			}
-			else if(input.matches("00")) {
+			else if(input.matches("00+")) {
 				System.out.println("Exiting system.");
 				System.exit(0);
 			}
@@ -171,7 +171,7 @@ public class Employee {
 		}
 	}
 	
-	public boolean updateDetails(int option) {
+	public void updateDetails(int option) {
 		String input = "";
 		
 		while(true) {
@@ -192,10 +192,10 @@ public class Employee {
 					input = scan.next();
 					if(input.matches("[1-4]")) {
 						this.setPayType(payTypeAvailable[ (Integer.parseInt(input) - 1) ]);
-						return false;
+						return;
 					}
 					else if(input.matches("0")) {
-						return true;
+						return;
 					}
 					else if(input.matches("00+")) {
 						System.out.println("Exiting system.");
@@ -209,8 +209,8 @@ public class Employee {
 			else if(option == 2) {
 				System.out.println("\nEnter new pay amount");
 				System.out.println("-----------------------------------------------------------------------------------------------");
-				System.out.println("00. Exit system.");
-				System.out.println("0. Previous menu.");
+				System.out.println("000. Exit system.");
+				System.out.println("00. Previous menu.");
 				System.out.println("-----------------------------------------------------------------------------------------------");
 				while(true) {
 					if(payType.equals(payTypeAvailable[0])) {
@@ -224,17 +224,18 @@ public class Employee {
 					
 					input = scan.next();
 					
-					if(input.matches("^[1-9]\\d+\\.*\\d{2}$")) {
-						this.setPayAmount(Float.parseFloat(input));
-						salary.setPayAmount(Float.parseFloat(input));
-						return false;
+					
+					if(input.matches("00")) {
+						return;
 					}
-					else if(input.matches("0")) {
-						return true;
-					}
-					else if(input.matches("00+")) {
+					else if(input.matches("000+")) {
 						System.out.println("Exiting system.");
 						System.exit(0);
+					}
+					else if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
+						this.setPayAmount(Float.parseFloat(input));
+						salary.setPayAmount(Float.parseFloat(input));
+						return;
 					}
 					else {
 						System.out.println("Invalid input, try again.");
@@ -244,23 +245,24 @@ public class Employee {
 			else if(option == 3) {
 				System.out.println("\nEnter new performance bonus amount");
 				System.out.println("-----------------------------------------------------------------------------------------------");
-				System.out.println("00. Exit system.");
-				System.out.println("0. Previous menu.");
+				System.out.println("000. Exit system.");
+				System.out.println("00. Previous menu.");
 				System.out.println("-----------------------------------------------------------------------------------------------");
 				while(true) {
-					System.out.printf("Current bonus: $%.2f%n",getPayAmount());
+					System.out.printf("Current bonus: $%.2f%n",salary.getPerformanceBonusAmount());
 					System.out.print("Bonus amount: ");
 					input = scan.next();
-					if(input.matches("^[1-9]\\d+\\.*\\d{2}$")) {
-						salary.setPerformanceBonusAmount(Float.parseFloat(input));
-						return false;
+					
+					if(input.matches("00")) {
+						return;
 					}
-					else if(input.matches("0")) {
-						return true;
-					}
-					else if(input.matches("00+")) {
+					else if(input.matches("000+")) {
 						System.out.println("Exiting system.");
 						System.exit(0);
+					}
+					else if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
+						salary.setPerformanceBonusAmount(Float.parseFloat(input));
+						return;
 					}
 					else {
 						System.out.println("Invalid input, try again.");
@@ -270,7 +272,7 @@ public class Employee {
 			}
 			else if(option <= 6 ) {
 				salary.promptAndUpdateSalary(option);
-				return false;
+				return;
 			}
 			else {
 				System.out.print("Invalid input, try again.");

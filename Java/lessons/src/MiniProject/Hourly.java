@@ -47,7 +47,7 @@ public class Hourly extends SalaryForMonth {
 			System.out.printf("Input total hours worked for this month (%d): ",totalHoursWorked);
 			input = scan.nextLine();
 			
-			if(input.matches("[1-9]\\d*")) {
+			if(input.matches("[0-9]\\d*")) {
 				setTotalHoursWorked(Integer.parseInt(input));
 				invalid = false;
 			}
@@ -142,7 +142,7 @@ public class Hourly extends SalaryForMonth {
 				System.out.printf("Current standard work hours: %d%n",getStandardHoursPerDay());
 				System.out.print("Hours: ");
 				input = scan.next();
-				if(input.matches("^[1-12]$")) {
+				if(input.matches("^[1-9]$") || input.matches("^1[0-2]$")) {
 					setStandardHoursPerDay(Integer.parseInt(input));
 					return false;
 				}
@@ -169,14 +169,11 @@ public class Hourly extends SalaryForMonth {
 			System.out.println("00. Exit system.");
 			System.out.println("-----------------------------------------------------------------------------------------------");
 			while(true) {
-				System.out.printf("Current rate: $%.2f%n",getOvertimeRate());
+				System.out.printf("Current rate: %.2f times%n",getOvertimeRate());
 				System.out.print("Rate in decimal: ");
 				input = scan.next();
-				if(input.matches("^0\\.[1-9][0-9]+$")) {
-					setStandardHoursPerDay(Integer.parseInt(input));
-					return false;
-				}
-				else if(input.isEmpty()) {
+				
+				if(input.isEmpty()) {
 					return false;
 				}
 				else if(input.matches("0")) {
@@ -185,6 +182,10 @@ public class Hourly extends SalaryForMonth {
 				else if(input.matches("00+")) {
 					System.out.println("Exiting system.");
 					System.exit(0);
+				}
+				else if(input.matches("^\\d{1}\\.*\\d{0,2}$")) {
+					this.setOvertimeRate(Float.parseFloat(input));
+					return false;
 				}
 				else {
 					System.out.println("Invalid input, try again");
@@ -202,11 +203,8 @@ public class Hourly extends SalaryForMonth {
 				System.out.printf("Current total hours worked: %d%n",getTotalHoursWorked());
 				System.out.print("Total hours: ");
 				input = scan.next();
-				if(input.matches("^\\d{0,2}$")) {
-					this.setTotalHoursWorked(Integer.parseInt(input));
-					return false;
-				}
-				else if(input.isEmpty()) {
+				
+				if(input.isEmpty()) {
 					return false;
 				}
 				else if(input.matches("^00$")) {
@@ -215,6 +213,10 @@ public class Hourly extends SalaryForMonth {
 				else if(input.matches("^000+$")) {
 					System.out.println("Exiting system.");
 					System.exit(0);
+				}
+				else if(input.matches("^\\d{0,3}$")) {
+					this.setTotalHoursWorked(Integer.parseInt(input));
+					return false;
 				}
 				else {
 					System.out.println("Invalid input, try again");

@@ -37,11 +37,8 @@ public class Commission extends SalaryForMonth {
 			System.out.printf("Current total sales earnings: %.2f%n",totalSalesAmount);
 			System.out.printf("Input total sales earnings for this month (%.2f): ",totalSalesAmount);
 			input = scan.nextLine();
-			if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
-				setTotalSalesAmount(Float.parseFloat(input));
-				invalid = false;
-			}
-			else if(input.isBlank()) {
+			
+			if(input.isBlank()) {
 				invalid =  false;
 			}
 			else if(input.matches("00")) {
@@ -49,6 +46,10 @@ public class Commission extends SalaryForMonth {
 			}
 			else if(input.matches("000+")) {
 				System.exit(0);
+			}
+			else if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
+				setTotalSalesAmount(Float.parseFloat(input));
+				invalid = false;
 			}
 			else {
 				System.out.println("Invalid input, try again.");
@@ -60,11 +61,8 @@ public class Commission extends SalaryForMonth {
 			System.out.printf("Current performance bonus: %.2f%n",getPerformanceBonusAmount());
 			System.out.print("Input performance bonus for this month (default 0): ");
 			input = scan.nextLine();
-			if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
-				setPerformanceBonusAmount(Float.parseFloat(input));
-				invalid = false;
-			}
-			else if(input.isBlank()) {
+			
+			if(input.isBlank()) {
 				invalid =  false;
 			}
 			else if(input.matches("00")) {
@@ -72,6 +70,10 @@ public class Commission extends SalaryForMonth {
 			}
 			else if(input.matches("000+")) {
 				System.exit(0);
+			}
+			else if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
+				setPerformanceBonusAmount(Float.parseFloat(input));
+				invalid = false;
 			}
 			else {
 				System.out.println("Invalid input, try again.");
@@ -119,11 +121,8 @@ public class Commission extends SalaryForMonth {
 				System.out.printf("Current commission rate: %.2f%n",getCommissionRate());
 				System.out.print("Rate in decimal: ");
 				input = scan.next();
-				if(input.matches("^0\\.[0-9]*[1-9]$")) {
-					setCommissionRate(Float.parseFloat(input));
-					return false;
-				}
-				else if(input.isBlank()) {
+				
+				if(input.isBlank()) {
 					return false;
 				}
 				else if(input.matches("0")) {
@@ -132,6 +131,10 @@ public class Commission extends SalaryForMonth {
 				else if(input.matches("00+")) {
 					System.out.println("Exiting system.");
 					System.exit(0);
+				}
+				else if(input.matches("^\\d{1}\\.*\\d{0,2}$")) {
+					setCommissionRate(Float.parseFloat(input));
+					return false;
 				}
 				else {
 					System.out.println("Invalid input, try again");
@@ -149,11 +152,8 @@ public class Commission extends SalaryForMonth {
 				System.out.printf("Current sales earnings amount: %.2f%n",getTotalSalesAmount());
 				System.out.print("Amount: ");
 				input = scan.next();
-				if(input.matches("^\\d*\\.[0-9]{0,2}$") || input.matches("^[1-9]+$")) {
-					this.setTotalSalesAmount(Float.parseFloat(input));
-					return false;
-				}
-				else if(input.isBlank()) {
+				
+				if(input.isBlank()) {
 					return false;
 				}
 				else if(input.matches("0")) {
@@ -162,6 +162,10 @@ public class Commission extends SalaryForMonth {
 				else if(input.matches("00+")) {
 					System.out.println("Exiting system.");
 					System.exit(0);
+				}
+				else if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
+					this.setTotalSalesAmount(Float.parseFloat(input));
+					return false;
 				}
 				else {
 					System.out.println("Invalid input, try again");

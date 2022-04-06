@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Sign up for an account</title>
+</head>
+<body>
+	<div>
+		<h2>Sign up</h2>
+		<form action="/SignInApplication/CreateAccount" method="post">
+			<table>
+				<tr>
+					<td><label>Name</label></td>
+					<td><input type="text" name="name" ></td>
+				</tr>
+				<tr>
+					<td><label>Username</label></td>
+					<td><input type="text" name="username" ></td>
+				</tr>
+				<tr>
+					<td><label>Password</label></td>
+					<td><input type="password" name="password" ></td>
+				</tr>
+				<tr>
+					<td><label>Confirm password</label></td>
+					<td><input type="password" name="confirmPassword" ></td>
+				</tr>
+				<tr>
+					<td><label>Email address</label></td>
+					<td><input type="email" name="email" ></td>
+				</tr>
+				<tr>
+					<h3>Passwords do not match.</h3>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Sign up"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>
