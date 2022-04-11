@@ -5,6 +5,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet Filter implementation class SignInFilter
@@ -29,9 +30,15 @@ public class SignInFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		String username = request.getParameter("username");
-		String passoword = request.getParameter("password");
+		String un = request.getParameter("username");
+		String pw = request.getParameter("password");
 		
+		if(un.length() == 0) {
+			((HttpServletResponse) response).sendRedirect("/SignInApplication/unEmpty.html");
+		}
+		else if(pw.length() == 0) {
+			((HttpServletResponse) response).sendRedirect("/SignInApplication/pwEmpty.html");
+		}
 		chain.doFilter(request, response);
 	}
 

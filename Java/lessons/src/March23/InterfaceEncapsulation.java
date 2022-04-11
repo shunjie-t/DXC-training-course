@@ -1,4 +1,4 @@
-package March23;
+package march23;
 
 public class InterfaceEncapsulation {
 	

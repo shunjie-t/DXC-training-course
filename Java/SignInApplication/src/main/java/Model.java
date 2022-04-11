@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import oracle.jdbc.OracleDriver;
@@ -11,6 +12,8 @@ public class Model {
 	private String password;
 	private String confirmPassword;
 	private String email;
+	private String newEmail;
+	
 	public String getName() {
 		return name;
 	}
@@ -41,20 +44,24 @@ public class Model {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+	public String getNewEmail() {
+		return newEmail;
+	}
+	public void setNewEmail(String newEmail) {
+		this.newEmail = newEmail;
+	}
+
 	public int createAccount() {
-		Connection con = null;
-		PreparedStatement pstmt;
 		int rows = 0;
 		
 		try {
 			DriverManager.registerDriver(new OracleDriver());
 			System.out.println("Driver loaded successfully");
 			
-			con = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/XE","system","57RER20^4!f");
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/XE","system","57RER20^4!f");
 			System.out.println("Connection established successfully");
 			
-			pstmt = con.prepareStatement("INSERT INTO userdetails(name,username,password,email) VALUES(?,?,?,?)");
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO userdetails(name,username,password,email) VALUES(?,?,?,?)");
 			pstmt.setString(1, name);
 			pstmt.setString(2, username);
 			pstmt.setString(3, password);
@@ -65,5 +72,88 @@ public class Model {
 			e.printStackTrace();
 		}
 		return rows;
+	}
+	
+	public int verify() {
+		try {
+			DriverManager.registerDriver(new OracleDriver());
+			System.out.println("Driver loaded successfully");
+			
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/XE","system","57RER20^4!f");
+			System.out.println("Connection established successfully");
+			
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM userdetails WHERE username = ?");
+			pstmt.setString(1, getUsername());
+			
+			ResultSet res = pstmt.executeQuery();
+			
+			if(res.next()) {
+				setName(res.getString(1));
+				setUsername(res.getString(2));
+				setEmail(res.getString(4));
+				
+				if(res.getString("password").equals(password)) {
+					return 1;
+				}
+				else {
+					return 0;
+				}
+			}
+			else {
+				return -1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return -1;
+	}
+	
+	public int updatePassword() {
+		int row = 0;
+		
+		try {
+			DriverManager.registerDriver(new OracleDriver());
+			System.out.println("Driver loaded successfully");
+			
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/XE","system","57RER20^4!f");
+			System.out.println("Connection established successfully");
+			
+			PreparedStatement pstmt = con.prepareStatement("UPDATE userdetails SET password = ? WHERE username = ?");
+			
+			pstmt.setString(1,password);
+			pstmt.setString(2,username);
+			row = pstmt.executeUpdate();
+			
+			return row;
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public int updateEmail() {
+		int row = 0;
+		
+		try {
+			DriverManager.registerDriver(new OracleDriver());
+			System.out.println("Driver loaded successfully");
+			
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1521/XE","system","57RER20^4!f");
+			System.out.println("Connection established successfully");
+			
+			PreparedStatement pstmt = con.prepareStatement("UPDATE userdetails SET email = ? WHERE username = ?");
+			
+			pstmt.setString(1,newEmail);
+			pstmt.setString(2, confirmPassword);
+			row = pstmt.executeUpdate();
+			
+			return row;
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 }

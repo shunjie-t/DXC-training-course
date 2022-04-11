@@ -1,4 +1,4 @@
-package March16;
+package march16;
 
 public class SimpleInterest {
 	private static float annualInterestRate;

@@ -1,4 +1,4 @@
-package March10;
+package march10;
 
 public class PrintPattern {
 	public static void main(String[] args) {

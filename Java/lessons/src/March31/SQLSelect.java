@@ -1,4 +1,4 @@
-package March31;
+package march31;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

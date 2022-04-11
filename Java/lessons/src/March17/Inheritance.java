@@ -1,4 +1,4 @@
-package March17;
+package march17;
 
 public class Inheritance {
 

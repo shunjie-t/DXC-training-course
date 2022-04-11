@@ -1,4 +1,4 @@
-package March21;
+package march21;
 
 import java.util.ArrayList;
 import java.util.Scanner;
