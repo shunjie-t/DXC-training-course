@@ -54,18 +54,18 @@ public class Hourly extends SalaryForMonth {
 			System.out.printf("Input total hours worked for this month (%d): ",totalHoursWorked);
 			input = scan.nextLine();
 			
-			if(input.matches("[0-9]\\d*")) {
+			if(input.matches("00")) {
+				return true;
+			}
+			else if(input.matches("000+")) {
+				System.exit(0);
+			}
+			else if(input.matches("[0-9]\\d*")) {
 				setTotalHoursWorked(Integer.parseInt(input));
 				invalid = false;
 			}
 			else if(input.isBlank()) {
 				invalid =  false;
-			}
-			else if(input.matches("00")) {
-				return true;
-			}
-			else if(input.matches("000+")) {
-				System.exit(0);
 			}
 			else {
 				System.out.println("Invalid input, try again.");
@@ -77,18 +77,19 @@ public class Hourly extends SalaryForMonth {
 			System.out.printf("Current performance bonus: %.2f%n",getPerformanceBonusAmount());
 			System.out.printf("Input performance bonus for this month (%.2f): ",getPerformanceBonusAmount());
 			input = scan.nextLine();
-			if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
+			
+			if(input.matches("00")) {
+				return true;
+			}
+			else if(input.matches("000+")) {
+				System.exit(0);
+			}
+			else if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
 				setPerformanceBonusAmount(Float.parseFloat(input));
 				invalid = false;
 			}
 			else if(input.isBlank()) {
 				invalid =  false;
-			}
-			else if(input.matches("00")) {
-				return true;
-			}
-			else if(input.matches("000+")) {
-				System.exit(0);
 			}
 			else {
 				System.out.println("Invalid input, try again.");

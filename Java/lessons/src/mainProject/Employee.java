@@ -1,7 +1,9 @@
 package mainProject;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -13,12 +15,12 @@ public class Employee {
 	private LocalDate joinDate;
 	private String payType;
 	private float payAmount;
-	private SalaryForMonth salary;
-	private ArrayList<SalaryForMonth> salaryRecord; // branch
+	private ArrayList<SalaryForMonth> salaryRecord;
 	
 	private String[] payTypeAvailable = {"hourly","monthly","commission","monthly with commission"};
 	public Scanner scan = new Scanner(System.in);
 	private LocalDate dt = LocalDate.now();
+	private int idx = -1;
 	
 	Employee(String eNum, String fName, String lName, LocalDate dob, LocalDate jDate, String pType, float pAmount) {
 		this.employeeNumber = eNum;
@@ -28,24 +30,7 @@ public class Employee {
 		this.joinDate = jDate;
 		this.payType = pType;
 		this.payAmount = pAmount;
-		
-		if(pType.equals("hourly")) {
-			this.salary = new Hourly(this.payAmount);
-		}
-		else if(pType.equals("monthly")) {
-			this.salary = new Monthly(this.payAmount);
-		}
-		else if(pType.equals("commission")) {
-			this.salary = new Commission(this.payAmount);
-		}
-		else if(pType.equals("monthly with commission")) {
-			this.salary = new MonthlyWithCommission(this.payAmount);
-		}
-		else {
-			System.out.println("Invalid pay type!");
-		}
-		
-		this.salaryRecord = retrieveSalaryRecords(); // branch
+		this.salaryRecord = retrieveSalaryRecords();
 	}
 	
 	public String getEmployeeNumber() {
@@ -124,11 +109,6 @@ public class Employee {
 		this.payAmount = pAmount;
 	}
 	
-	public SalaryForMonth getSalary() {
-		return this.salary;
-	}
-	
-	// branch
 	public ArrayList<SalaryForMonth> getSalaryRecord() {
 		return salaryRecord;
 	}
@@ -136,8 +116,92 @@ public class Employee {
 	public void displayAndUpdateDetails() {
 		String input;
 		int option;
+		boolean repeat = true;
+		int size = salaryRecord.size();
+		HashMap<LocalDate,Integer> dateIdx = new HashMap<LocalDate,Integer>();
 		
-		while(true) {
+		System.out.println("Enter month and year in MMYYYY to view and edit past payrolls.");
+		System.out.println("Defaults to lastest month if no input is entered.");
+		System.out.println("-----------------------------------------------------------------------------------------------");
+		System.out.println("00. Exit system.");
+		System.out.println("0. Previous menu.");
+		System.out.println("-----------------------------------------------------------------------------------------------");
+		System.out.println("Date of past payrolls.");
+		for(int a = 0; a < size; a+=6) {
+			if(size < 6 || (a+6) > size) {
+				for(int b = 0; b < (size % 6); b++) {
+					dateIdx.put(LocalDate.of(salaryRecord.get(a+b).getCurrentDate().getYear(),salaryRecord.get(a+b).getCurrentDate().getMonthValue(), 1),a+b);
+					System.out.print(String.format("%2s", salaryRecord.get(a+b).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a+b).getCurrentDate().getYear()+"  ");
+				}
+				System.out.println("");
+			}
+			else {
+				dateIdx.put(LocalDate.of(salaryRecord.get(a).getCurrentDate().getYear(),salaryRecord.get(a).getCurrentDate().getMonthValue(),1),a);
+				dateIdx.put(LocalDate.of(salaryRecord.get(a+1).getCurrentDate().getYear(),salaryRecord.get(a+1).getCurrentDate().getMonthValue(),1),a+1);
+				dateIdx.put(LocalDate.of(salaryRecord.get(a+2).getCurrentDate().getYear(),salaryRecord.get(a+2).getCurrentDate().getMonthValue(),1),a+2);
+				dateIdx.put(LocalDate.of(salaryRecord.get(a+3).getCurrentDate().getYear(),salaryRecord.get(a+3).getCurrentDate().getMonthValue(),1),a+3);
+				dateIdx.put(LocalDate.of(salaryRecord.get(a+4).getCurrentDate().getYear(),salaryRecord.get(a+4).getCurrentDate().getMonthValue(),1),a+4);
+				dateIdx.put(LocalDate.of(salaryRecord.get(a+5).getCurrentDate().getYear(),salaryRecord.get(a+5).getCurrentDate().getMonthValue(),1),a+5);
+				
+				System.out.print(String.format("%2s",salaryRecord.get(a).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a).getCurrentDate().getYear()+"  ");
+				System.out.print(String.format("%2s",salaryRecord.get(a+1).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a+1).getCurrentDate().getYear()+"  ");
+				System.out.print(String.format("%2s",salaryRecord.get(a+2).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a+2).getCurrentDate().getYear()+"  ");
+				System.out.print(String.format("%2s",salaryRecord.get(a+3).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a+3).getCurrentDate().getYear()+"  ");
+				System.out.print(String.format("%2s",salaryRecord.get(a+4).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a+4).getCurrentDate().getYear()+"  ");
+				System.out.println(String.format("%2s",salaryRecord.get(a+5).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a+5).getCurrentDate().getYear());
+			}
+		}
+		while(repeat) {
+			System.out.printf("Select a date in MMYYYY (%d%d): ",
+					salaryRecord.get(salaryRecord.size()-1).getCurrentDate().getMonthValue(),
+					salaryRecord.get(salaryRecord.size()-1).getCurrentDate().getYear());
+			input = scan.nextLine();
+			if(input.matches("0")) {
+				return;
+			}
+			else if(input.matches("00+")) {
+				System.out.println("Exiting system.");
+				System.exit(0);
+			}
+			else if(input.matches("\\d{5}") || input.matches("\\d{6}") || input.isBlank()) {
+				int month = 0;
+				int year = 0;
+				
+				if(input.matches("\\d{5}")) {
+					month = Integer.parseInt(input.substring(0,1));
+					year = Integer.parseInt(input.substring(1,5));
+				}
+				else if(input.matches("\\d{6}")) {
+					month = Integer.parseInt(input.substring(0,2));
+					year = Integer.parseInt(input.substring(2,6));
+				}
+				else if(input.isBlank()) {
+					month = salaryRecord.get(salaryRecord.size()-1).getCurrentDate().getMonthValue();
+					year = salaryRecord.get(salaryRecord.size()-1).getCurrentDate().getYear();
+				}
+				
+				try {
+					LocalDate tempDt = LocalDate.of(year, month, 1);
+					idx = dateIdx.get(tempDt);
+					repeat = false;
+				}
+				catch(NullPointerException npe) {
+					System.out.println("Invalid date, try again.");
+				}
+				catch(DateTimeException dte) {
+					System.out.println("Invalid date, try again.");
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				System.out.println("Invalid input, try again.");
+			}
+		}
+		
+		repeat = true;
+		while(repeat) {
 			System.out.println("\nEmployee's basic information");
 			System.out.println("-----------------------------------------------------------------------------------------------");
 			System.out.printf("Employee number: %s%n",getEmployeeNumber());
@@ -153,10 +217,10 @@ public class Employee {
 			System.out.println("-----------------------------------------------------------------------------------------------");
 			System.out.printf("1. Pay type: %s%n",getPayType());
 			System.out.printf("2. Pay amount: %.2f%n",getPayAmount());
-			System.out.printf("3. Performance bonus: %.2f%n",salary.getPerformanceBonusAmount());
-			salary.displaySalaryDetails();
+			System.out.printf("3. Performance bonus: %.2f%n",salaryRecord.get(idx).getPerformanceBonusAmount());
+			salaryRecord.get(idx).displaySalaryDetails();
 			System.out.println("-----------------------------------------------------------------------------------------------");
-			System.out.printf("%s %d, gross salary: %.2f%n",dt.getMonth(),dt.getYear(),salary.getTotalSalary());
+			System.out.printf("%s %d, gross salary: %.2f%n",dt.getMonth(),dt.getYear(),salaryRecord.get(idx).getTotalSalary());
 			System.out.println("-----------------------------------------------------------------------------------------------");
 			System.out.print("Enter an option: ");
 			
@@ -241,7 +305,7 @@ public class Employee {
 					}
 					else if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
 						this.setPayAmount(Float.parseFloat(input));
-						salary.setPayAmount(Float.parseFloat(input));
+						salaryRecord.get(idx).setPayAmount(Float.parseFloat(input));
 						return;
 					}
 					else {
@@ -256,7 +320,7 @@ public class Employee {
 				System.out.println("00. Previous menu.");
 				System.out.println("-----------------------------------------------------------------------------------------------");
 				while(true) {
-					System.out.printf("Current bonus: $%.2f%n",salary.getPerformanceBonusAmount());
+					System.out.printf("Current bonus: $%.2f%n",salaryRecord.get(idx).getPerformanceBonusAmount());
 					System.out.print("Bonus amount: ");
 					input = scan.next();
 					
@@ -268,7 +332,7 @@ public class Employee {
 						System.exit(0);
 					}
 					else if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
-						salary.setPerformanceBonusAmount(Float.parseFloat(input));
+						salaryRecord.get(idx).setPerformanceBonusAmount(Float.parseFloat(input));
 						return;
 					}
 					else {
@@ -278,7 +342,7 @@ public class Employee {
 
 			}
 			else if(option <= 6 ) {
-				salary.promptAndUpdateSalary(option);
+				salaryRecord.get(idx).promptAndUpdateSalary(option);
 				return;
 			}
 			else {
@@ -288,23 +352,135 @@ public class Employee {
 	}
 	
 	public boolean calculateTotalPay() {
-		boolean repeat = false;
+		String input = "";
+		boolean repeat = true;
+		int size = salaryRecord.size();
+		HashMap<LocalDate,Integer> dateIdx = new HashMap<LocalDate,Integer>();
 		
-		repeat = salary.promptForInput();
-		if(!repeat) salary.computeSalary();
+		System.out.println("Enter month and year in MMYYYY to calculate past payrolls.");
+		System.out.println("Defaults to current month if no input is entered.");
+		System.out.println("-----------------------------------------------------------------------------------------------");
+		System.out.println("00. Exit system.");
+		System.out.println("0. Previous menu.");
+		System.out.println("-----------------------------------------------------------------------------------------------");
+		System.out.println("Date of past payrolls.");
+		for(int a = 0; a < size; a+=6) {
+			if(size < 6 || (a+6) > size) {
+				for(int b = 0; b < (size % 6); b++) {
+					dateIdx.put(LocalDate.of(salaryRecord.get(a+b).getCurrentDate().getYear(),salaryRecord.get(a+b).getCurrentDate().getMonthValue(), 1),a+b);
+					System.out.print(String.format("%2s", salaryRecord.get(a+b).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a+b).getCurrentDate().getYear()+"  ");
+				}
+				System.out.println("");
+			}
+			else {
+				dateIdx.put(LocalDate.of(salaryRecord.get(a).getCurrentDate().getYear(),salaryRecord.get(a).getCurrentDate().getMonthValue(),1),a);
+				dateIdx.put(LocalDate.of(salaryRecord.get(a+1).getCurrentDate().getYear(),salaryRecord.get(a+1).getCurrentDate().getMonthValue(),1),a+1);
+				dateIdx.put(LocalDate.of(salaryRecord.get(a+2).getCurrentDate().getYear(),salaryRecord.get(a+2).getCurrentDate().getMonthValue(),1),a+2);
+				dateIdx.put(LocalDate.of(salaryRecord.get(a+3).getCurrentDate().getYear(),salaryRecord.get(a+3).getCurrentDate().getMonthValue(),1),a+3);
+				dateIdx.put(LocalDate.of(salaryRecord.get(a+4).getCurrentDate().getYear(),salaryRecord.get(a+4).getCurrentDate().getMonthValue(),1),a+4);
+				dateIdx.put(LocalDate.of(salaryRecord.get(a+5).getCurrentDate().getYear(),salaryRecord.get(a+5).getCurrentDate().getMonthValue(),1),a+5);
+				
+				System.out.print(String.format("%2s",salaryRecord.get(a).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a).getCurrentDate().getYear()+"  ");
+				System.out.print(String.format("%2s",salaryRecord.get(a+1).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a+1).getCurrentDate().getYear()+"  ");
+				System.out.print(String.format("%2s",salaryRecord.get(a+2).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a+2).getCurrentDate().getYear()+"  ");
+				System.out.print(String.format("%2s",salaryRecord.get(a+3).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a+3).getCurrentDate().getYear()+"  ");
+				System.out.print(String.format("%2s",salaryRecord.get(a+4).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a+4).getCurrentDate().getYear()+"  ");
+				System.out.println(String.format("%2s",salaryRecord.get(a+5).getCurrentDate().getMonthValue())+"-"+salaryRecord.get(a+5).getCurrentDate().getYear());
+			}
+		}
+		while(repeat) {
+			System.out.printf("Select a date in MMYYYY (%d%d): ",dt.getMonthValue(),dt.getYear());
+			input = scan.nextLine();
+			if(input.matches("0")) {
+				return true;
+			}
+			else if(input.matches("00+")) {
+				System.out.println("Exiting system.");
+				System.exit(0);
+			}
+			else if(input.matches("\\d{5}") || input.matches("\\d{6}") || input.isBlank()) {
+				int month = 0;
+				int year = 0;
+				
+				if(input.matches("\\d{5}")) {
+					month = Integer.parseInt(input.substring(0,1));
+					year = Integer.parseInt(input.substring(1,5));
+				}
+				else if(input.matches("\\d{6}")) {
+					month = Integer.parseInt(input.substring(0,2));
+					year = Integer.parseInt(input.substring(2,6));
+				}
+				else if(input.isBlank()) {
+					month = dt.getMonthValue();
+					year = dt.getYear();
+				}
+				
+				try {
+					LocalDate tempDt = LocalDate.of(year, month, 1);
+					idx = dateIdx.get(tempDt);					
+					repeat = false;
+				}
+				catch(NullPointerException npe) {
+					if(year < joinDate.getYear() || month < joinDate.getMonthValue() && year == joinDate.getYear()) {
+						System.out.println("Invalid date, must not be earlier than join date.");
+					}
+					else {
+						idx = -1;
+						repeat = false;
+					}
+				}
+				catch(DateTimeException dte) {
+					System.out.println("Invalid date, try again.");
+				}
+				catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				System.out.println("Invalid input, try again.");
+			}
+		}
+		
+		if(idx == -1) {
+			SalaryForMonth sfm = null;
+			
+			if(payType.equals("hourly")) {
+				sfm = new Hourly(this.payAmount);
+			}
+			else if(payType.equals("monthly")) {
+				sfm = new Monthly(this.payAmount);
+			}
+			else if(payType.equals("commission")) {
+				sfm = new Commission(this.payAmount);
+			}
+			else if(payType.equals("monthly with commission")) {
+				sfm = new MonthlyWithCommission(this.payAmount);
+			}
+			else {
+				System.out.println("Invalid pay type!");
+			}
+			
+			salaryRecord.add(sfm);
+			idx = salaryRecord.size() - 1;
+			
+			repeat = salaryRecord.get(idx).promptForInput();
+			if(!repeat) salaryRecord.get(idx).computeSalary();
+		}
+		else {
+			repeat = salaryRecord.get(idx).promptForInput();
+			if(!repeat) salaryRecord.get(idx).computeSalary();
+		}
 		
 		return repeat;
 	}
 	
-	// branch
 	private ArrayList<SalaryForMonth> retrieveSalaryRecords() {
 		ArrayList<SalaryForMonth> s = new ArrayList<SalaryForMonth>();
-		LocalDate temp = LocalDate.now();
 		
-		for(int a = joinDate.getYear(); a <= temp.getYear(); a++) {
+		for(int a = joinDate.getYear(); a <= dt.getYear(); a++) {
 			if(a != joinDate.getYear()) {
 				for(int b = 1; b <= 12; b++) {
-					if(a == temp.getYear() && b >= temp.getMonthValue()) {
+					if(a == dt.getYear() && b >= dt.getMonthValue()) {
 						continue;
 					}
 					else {
@@ -328,7 +504,7 @@ public class Employee {
 			}
 			else {
 				for(int b = joinDate.getMonthValue(); b <= 12; b++) {
-					if(a == temp.getYear() && b >= temp.getMonthValue()) {
+					if(a == dt.getYear() && b >= dt.getMonthValue()) {
 						continue;
 					}
 					else {

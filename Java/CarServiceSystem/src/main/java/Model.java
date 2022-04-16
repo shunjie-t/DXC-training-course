@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import oracle.jdbc.OracleDriver;
 
@@ -17,6 +18,10 @@ public class Model {
 	private String carmodel;
 	private String cartype;
 	private String carregnumber;
+	private String servicerequest;
+	private String status;
+	private ArrayList<Customer> custAl = new ArrayList<Customer>();
+	private ArrayList<Car> carAl = new ArrayList<Car>();
 	
 	Model() {
 		try {
@@ -31,6 +36,11 @@ public class Model {
 		}
 	}
 	
+	@Override
+	public String toString() {
+		return "Model [custAl=" + custAl + "]";
+	}
+
 	public String getAun() {
 		return aun;
 	}
@@ -103,6 +113,22 @@ public class Model {
 		this.carregnumber = carregnumber;
 	}
 
+	public String getServicerequest() {
+		return servicerequest;
+	}
+
+	public void setServicerequest(String servicerequest) {
+		this.servicerequest = servicerequest;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	int adminVerify() {
 		try {
 			PreparedStatement pstmt = con.prepareStatement("select * from AdminDB where aun = ?");
@@ -169,19 +195,118 @@ public class Model {
 	
 	int updateCarDetails() {
 		try {
-			PreparedStatement pstmt = con.prepareStatement("insert into CUSTOMERCARDETAILS values(?,?,?)");
-			pstmt.setString(1, carmodel);
-			pstmt.setString(2, cartype);
-			pstmt.setString(3, carregnumber);
+			PreparedStatement pstmt = con.prepareStatement("insert into cardetails values(?,?,?,?,?,?)");
+			pstmt.setString(1, cun);
+			pstmt.setString(2, carmodel);
+			pstmt.setString(3, cartype);
+			pstmt.setString(4, carregnumber);
+			pstmt.setString(5, "");
+			pstmt.setString(6, "");
 			
 			int rows = pstmt.executeUpdate();
 			return rows;
 		} 
 		catch(SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		
+		return 0;
+	}
+	
+	int updateCarService() {
+		try {
+			PreparedStatement pstmt = con.prepareStatement("update cardetails set servicerequest = ?, status = ? where cun = ?");
+			pstmt.setString(1, servicerequest);
+			pstmt.setString(2, status);
+			pstmt.setString(3, cun);
+			
+			return pstmt.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	
+	ArrayList<Customer> getRegisteredCustomers() {
+		try {
+			PreparedStatement pstmt = con.prepareStatement("select * from CustomerDB");
+			ResultSet res = pstmt.executeQuery();
+			
+			while(res.next()) {
+				cname = res.getString("cname");
+				cun = res.getString("cun");
+				cpwd = res.getString("cpwd");
+				cemail = res.getString("email");
+				custAl.add(new Customer(cname,cun,cpwd,cemail));
+			}
+			
+			return custAl;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return custAl;
+	}
+	
+	ArrayList<Car> getPendingRequest() {
+		try {
+			PreparedStatement pstmt = con.prepareStatement("select * from cardetails where status = ?");
+			ResultSet res = pstmt.executeQuery();
+			
+			while(res.next()) {
+				cun = res.getString("cun");
+				carmodel = res.getString("carmodel");
+				cartype = res.getString("carmodel");
+				carregnumber = res.getString("carplate");
+				servicerequest = res.getString("servicereq");
+				status = res.getString("status");
+				carAl.add(new Car(cun, carmodel, cartype, carregnumber, servicerequest, status));
+			}
+			
+			return carAl;
+		} 
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return carAl;
+	}
+	
+	int UpdateStatus() {
+		try {
+			PreparedStatement pstmt = con.prepareStatement("update cardetails set status = 'true' where cun = ?");
+			pstmt.setString(1, cun);
+			int row = pstmt.executeUpdate();
+			System.out.println("row is: " + row);
+			
+			return row;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	
+	int checkUpdate() {
+		try {
+			PreparedStatement pstmt = con.prepareStatement("select status from cardetails where cun = ?");
+			pstmt.setString(1, cun);
+			ResultSet res = pstmt.executeQuery();
+			
+			if(res.next()) {
+				status = res.getString("status");
+			}
+			
+			return 1;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return 0;
 	}

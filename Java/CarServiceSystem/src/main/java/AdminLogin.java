@@ -3,6 +3,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class AdminLogin extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -18,6 +19,8 @@ public class AdminLogin extends HttpServlet {
 			response.sendRedirect("/CarServiceSystem/adminLoginFailure.html");
 		}
 		else {
+			HttpSession session = request.getSession();
+			session.setAttribute("aun", aun);
 			response.sendRedirect("/CarServiceSystem/adminLoginSuccess.jsp");
 		}
 	}

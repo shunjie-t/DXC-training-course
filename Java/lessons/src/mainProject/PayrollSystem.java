@@ -70,7 +70,7 @@ public class PayrollSystem {
 	}
 	
 	public void displayEmployees() {		
-		System.out.println("\nSelect an employee");
+		System.out.println("Select an employee");
 		System.out.println("-----------------------------------------------------------------------------------------------");
 		System.out.println("00. Exit system.");
 		System.out.println("0. Previous menu.");
@@ -87,11 +87,19 @@ public class PayrollSystem {
 		boolean prompt = true;
 		
 		while(prompt) {
+			System.out.println("\nCompute existing employee's salary for the month.");
 			displayEmployees();
 			System.out.print("Enter an ID: ");
 			input = scan.nextLine();
 			
-			if(input.matches("^0*[1-"+emp.size()+"]$")) {
+			if(input.matches("0")) {
+				return;
+			}
+			else if(input.matches("00+")) {
+				System.out.println("Exiting system.");
+				System.exit(0);
+			}
+			else if(input.matches("^0*[1-"+emp.size()+"]$")) {
 				index = (Integer.parseInt(input) - 1);
 				prompt = false;
 				
@@ -102,13 +110,6 @@ public class PayrollSystem {
 						emp.get(index).getLastName(),
 						emp.get(index).getEmployeeNumber());
 				prompt = emp.get(index).calculateTotalPay();
-			}
-			else if(input.matches("00+")) {
-				System.out.println("Exiting system.");
-				System.exit(0);
-			}
-			else if(input.matches("0")) {
-				return;
 			}
 			else {
 				System.out.println("Invalid input, try again.");
@@ -121,6 +122,7 @@ public class PayrollSystem {
 		int index = 0;
 		
 		while(true) {
+			System.out.println("\nView or edit existing employee details");
 			displayEmployees();
 			System.out.print("Enter an ID: ");
 			input = scan.nextLine();

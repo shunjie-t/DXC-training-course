@@ -1,0 +1,64 @@
+<div>
+    <h1>Angular Form</h1>
+    <form #userForm="ngForm">
+
+        <!-- {{ userForm.value | json }}
+        <hr>
+        {{ userData | json }} -->
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" #name="ngModel" required name="name" [class.is-invalid]="name.invalid && name.touched" class="form-control is-invalid" [(ngModel)]="userData.name">
+        </div>
+        untouched: {{name.untouched}}
+        pristine: {{name.pristine}}
+        valid: {{name.valid}}
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" #email name="email" class="form-control" [(ngModel)]="userData.email">
+        </div>
+        {{email.className}}
+        <div class="form-group">
+            <label>Mobile number</label>
+            <input type="number" name="mobile" class="form-control" [(ngModel)]="userData.phone">
+        </div>
+        <!-- <div [(ngModel)]Group="jobRole">
+            <div class="form-group">
+                <label>Role</label>
+                <input type="text" class="form-control" name="role" [(ngModel)]>
+            </div>
+            <div class="form-group">
+                <label>Department</label>
+                <input type="text" class="form-control" name="dept" [(ngModel)]>
+            </div>
+            <div class="form-group">
+                <label>Company</label>
+                <input type="text" class="form-control" name="company" [(ngModel)]>
+            </div>
+        </div> -->
+        <br>
+        <div class="form-group">
+            <select class="custom-select" name="country" [(ngModel)]="userData.country">
+                <option value="">Choose your country</option>
+                <option *ngFor="let city of cities">{{city}}</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Gender</label>
+            <input type="radio" name="gender" value="male" class="form-check-input" [(ngModel)]="userData.gender">
+            <label for="form-check-label">Male</label>
+            <input type="radio" name="gender" value="female" class="form-check-input" [(ngModel)]="userData.gender">
+            <label for="form-check-label">Female</label>
+        </div>
+        <br>
+        <div class="form-group">
+            <input class="form-check-input" name="check" type="checkbox" [(ngModel)]="userData.check">
+            <label class="form-check-label">Confirm all details are true</label>
+        </div>
+        <br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>

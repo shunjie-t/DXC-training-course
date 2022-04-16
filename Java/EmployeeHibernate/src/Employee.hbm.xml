@@ -1,0 +1,17 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="Employee" table="EMPLOYEEHIBERNATE">
+		<id name="eid" type="int" column="id"></id>
+		<property name="efirstname">
+			<column name="firstname" />
+		</property>
+		<property name="esecondname">
+			<column name="secondname" />
+		</property>
+		<property name="eemail">
+			<column name="email" />
+		</property>
+	</class>
+</hibernate-mapping>

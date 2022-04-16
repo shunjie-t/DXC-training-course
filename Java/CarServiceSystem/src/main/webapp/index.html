@@ -3,13 +3,28 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style>
+body {
+	background-color: rgb(255,153,104);
+}
+
+#container {
+	display: flex;
+}
+</style>
 </head>
 <body>
-<form action="/CarServiceSystem/adminLogin.html">
-	<input type="submit" value="admin" >
-</form>
-<form action="/CarServiceSystem/customerWelcome.html">
-	<input type="submit" value="customer" >
-</form>
+<div id="container">
+	<h1>Welcome to car service system</h1>
+	<div>
+		<form action="/CarServiceSystem/adminLogin.html">
+			<input type="submit" value="admin" >
+		</form>
+		<form action="/CarServiceSystem/customerWelcome.html">
+			<input type="submit" value="customer" >
+		</form>
+	</div>
+</div>
+
 </body>
 </html>

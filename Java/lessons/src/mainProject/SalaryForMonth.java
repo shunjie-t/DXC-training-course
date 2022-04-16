@@ -7,7 +7,6 @@ import java.util.Scanner;
 public abstract class SalaryForMonth {
 	private float performanceBonusAmount = 0;
 	protected LocalDate currentDate = LocalDate.now();
-	// protected LocalDate currentDate = null; // branch
 	private int workDaysForMonth = 0;
 	private float payAmount;
 	private float totalSalary;
@@ -25,7 +24,6 @@ public abstract class SalaryForMonth {
 		}		
 	}
 	
-	// branch
 	SalaryForMonth(float pAmount,LocalDate cDate) {
 		this.payAmount = pAmount;
 		this.currentDate = cDate;
@@ -47,11 +45,11 @@ public abstract class SalaryForMonth {
 		this.performanceBonusAmount = pBonusAmount;
 	}
 	
-	public LocalDate getDate() {
+	public LocalDate getCurrentDate() {
 		return this.currentDate;
 	}
 	
-	public void setDate(LocalDate cDate) {
+	public void setCurrentDate(LocalDate cDate) {
 		this.currentDate = cDate;
 	}
 	

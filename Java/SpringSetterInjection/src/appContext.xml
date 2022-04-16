@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <!-- Define your beans here -->
+    
+    <!-- scope is singleton by default -->
+    <bean id="employee" class="com.dxc.SetterInjection.Employee" scope="singleton" init-method="empStart" destroy-method="empStop">
+    <!-- <bean id="employee" class="com.dxc.SetterInjection.Employee" scope="prototype" init-method="empStart" destroy-method="empStop"> -->
+    	<!-- define the dependency -->
+    	<property name="empId" value="1"></property>
+    	<property name="empName" value="Kennedy"></property>
+    	<property name="empRole" value="Project manager"></property>
+    	<property name="empDept" value="Engineering"></property>
+    </bean>
+</beans>

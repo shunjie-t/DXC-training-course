@@ -35,18 +35,19 @@ public class Monthly extends SalaryForMonth {
 			System.out.printf("Current unpaid leave taken: %d%n",unpaidLeaveTaken);
 			System.out.printf("Input unpaid leave taken (%d): ",unpaidLeaveTaken);
 			input = scan.nextLine();
-			if(input.matches("^[0-20]$")) {
+			
+			if(input.matches("00")) {
+				return true;
+			}
+			else if(input.matches("000+")) {
+				System.exit(0);
+			}
+			else if(input.matches("^[0-20]$")) {
 				setUnpaidLeaveTaken(Integer.parseInt(input));
 				invalid = false;
 			}
 			else if(input.isBlank()) {
 				invalid =  false;
-			}
-			else if(input.matches("00")) {
-				return true;
-			}
-			else if(input.matches("000+")) {
-				System.exit(0);
 			}
 			else {
 				System.out.println("Invalid input, please enter again");
@@ -58,19 +59,21 @@ public class Monthly extends SalaryForMonth {
 			System.out.printf("Current performance bonus: %.2f%n",getPerformanceBonusAmount());
 			System.out.printf("Input performance bonus for this month (%.2f): ",getPerformanceBonusAmount());
 			input = scan.nextLine();
-			if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
+			
+			if(input.matches("00")) {
+				return true;
+			}
+			else if(input.matches("000+")) {
+				System.exit(0);
+			}
+			else if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
 				setPerformanceBonusAmount(Float.parseFloat(input));
 				invalid = false;
 			}
 			else if(input.isBlank()) {
 				invalid =  false;
 			}
-			else if(input.matches("00")) {
-				return true;
-			}
-			else if(input.matches("000+")) {
-				System.exit(0);
-			}
+			
 			else {
 				System.out.println("Invalid input, try again.");
 			}

@@ -45,14 +45,14 @@ public class Commission extends SalaryForMonth {
 			System.out.printf("Input total sales earnings for this month (%.2f): ",totalSalesAmount);
 			input = scan.nextLine();
 			
-			if(input.isBlank()) {
-				invalid =  false;
-			}
-			else if(input.matches("00")) {
+			if(input.matches("00")) {
 				return true;
 			}
 			else if(input.matches("000+")) {
 				System.exit(0);
+			}
+			else if(input.isBlank()) {
+				invalid =  false;
 			}
 			else if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
 				setTotalSalesAmount(Float.parseFloat(input));
@@ -69,14 +69,14 @@ public class Commission extends SalaryForMonth {
 			System.out.print("Input performance bonus for this month (default 0): ");
 			input = scan.nextLine();
 			
-			if(input.isBlank()) {
-				invalid =  false;
-			}
-			else if(input.matches("00")) {
+			if(input.matches("00")) {
 				return true;
 			}
 			else if(input.matches("000+")) {
 				System.exit(0);
+			}
+			else if(input.isBlank()) {
+				invalid =  false;
 			}
 			else if(input.matches("^\\d+\\.{0,1}\\d{0,2}$")) {
 				setPerformanceBonusAmount(Float.parseFloat(input));

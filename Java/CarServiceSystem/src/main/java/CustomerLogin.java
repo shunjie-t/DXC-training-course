@@ -16,15 +16,16 @@ public class CustomerLogin extends HttpServlet {
 		
 		int x = m.customerVerify();
 		if(x == 1) {
+			String cname = m.getCname();
+			HttpSession session = request.getSession();
+			session.setAttribute("cname", cname);
+			session.setAttribute("cun", cun);
 			response.sendRedirect("/CarServiceSystem/customerLoginSuccess.jsp");
 		}
 		else if(x == -1) {
 			response.sendRedirect("/CarServiceSystem/invalidCustomerUsername.html");
 		}
 		else {
-			String cname = m.getCname();
-			HttpSession session = request.getSession();
-			session.setAttribute("cname", cname);
 			response.sendRedirect("/CarServiceSystem/invalidCustomerPassword.html");
 		}
 	}

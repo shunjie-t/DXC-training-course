@@ -45,6 +45,48 @@
 		<servlet-name>UpdateCarDetails</servlet-name>
 		<servlet-class>UpdateCarDetails</servlet-class>
 	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>registeredCustomer</display-name>
+		<servlet-name>registeredCustomer</servlet-name>
+		<servlet-class>registeredCustomer</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>PendingRequest</display-name>
+		<servlet-name>PendingRequest</servlet-name>
+		<servlet-class>PendingRequest</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>UpdateStatus</display-name>
+		<servlet-name>UpdateStatus</servlet-name>
+		<servlet-class>UpdateStatus</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>Serve</display-name>
+		<servlet-name>Serve</servlet-name>
+		<servlet-class>Serve</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>ServiceRequest</display-name>
+		<servlet-name>ServiceRequest</servlet-name>
+		<servlet-class>ServiceRequest</servlet-class>
+	</servlet>
+	<servlet>
+		<description>
+		</description>
+		<display-name>CheckStatus</display-name>
+		<servlet-name>CheckStatus</servlet-name>
+		<servlet-class>CheckStatus</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>AdminLogin</servlet-name>
 		<url-pattern>/AdminLogin</url-pattern>
@@ -60,6 +102,26 @@
 	<servlet-mapping>
 		<servlet-name>UpdateCarDetails</servlet-name>
 		<url-pattern>/UpdateCarDetails</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>registeredCustomer</servlet-name>
+		<url-pattern>/registeredCustomer</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PendingRequest</servlet-name>
+		<url-pattern>/PendingRequest</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UpdateStatus</servlet-name>
+		<url-pattern>/UpdateStatus</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ServiceRequest</servlet-name>
+		<url-pattern>/ServiceRequest</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CheckStatus</servlet-name>
+		<url-pattern>/CheckStatus</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

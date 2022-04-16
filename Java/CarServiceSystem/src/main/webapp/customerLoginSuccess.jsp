@@ -8,11 +8,13 @@
 </head>
 <body>
 <h1>Welcome <% 
-	// HttpSession ses = request.getSession();
-	// out.println(ses.getAttribute("cname"));
-	out.println(request.getSession().getAttribute("cname"));
+	out.println(session.getAttribute("cname"));
 %>, you have successfully logged in</h1>
 
 <a href="/CarServiceSystem/updateCarDetails.html">Update you car details</a>
+<br><br>
+<a href="/CarServiceSystem/serviceRequest.html">Request for a service</a>
+<br><br>
+<a href="/CarServiceSystem/CheckStatus">Check service status</a>
 </body>
 </html>

@@ -7,12 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Welcome <% 
-	// HttpSession ses = request.getSession();
-	// out.println(ses.getAttribute("cname"));
-	out.println(request.getSession().getAttribute("cname"));
-%>, you have successfully registered</h1>
+<h1>Welcome <% out.println(session.getAttribute("aun")); %>, you have successfully registered</h1>
 
-<a href="/CarServiceSystem/customerLogin.html">login</a>
+<form action="/CarServiceSystem/RegisteredCustomer">
+	<input type="submit" value="Registered customer">
+</form>
+<br><br>
+<form action="/CarServiceSystem/PendingRequest">
+	<input type="submit" value="Pending request">
+</form>
+<br><br>
+<form action="/CarServiceSystem/updateStatus.html">
+	<input type="submit" value="Update status">
+</form>
+<br><br>
 </body>
 </html>
