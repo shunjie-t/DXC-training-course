@@ -1,0 +1,26 @@
+<h1>List of books</h1>
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-stripped">
+                <thead>
+                    <th>Book ID</th>
+                    <th>Book Title</th>
+                    <th>Book Author</th>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor = "let b of books">
+                        <td>{{b.id}}</td>
+                        <td>{{b.title}}</td>
+                        <td>{{b.author}}</td>
+                        <td>
+                            <button (click)="updateBook(b.id)" class="btn btn-info">Update Info</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
